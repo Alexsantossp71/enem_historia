@@ -18,7 +18,7 @@
             line-height: 1.9;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -40,6 +40,82 @@
             color: rgba(255,255,255,0.6);
             font-style: italic;
         }
+        
+        /* Audio Player Styles */
+        .audio-player-container {
+            background: linear-gradient(135deg, rgba(240, 192, 64, 0.15), rgba(240, 140, 64, 0.1));
+            border: 1px solid rgba(240, 192, 64, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .audio-player-container h3 {
+            color: #f0c040;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .audio-player-container audio {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+        }
+        .audio-player-container .audio-info {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .play-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f0c040, #e0a030);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(240, 192, 64, 0.4);
+        }
+        .play-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Image Styles */
+        .story-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 3px solid rgba(240, 192, 64, 0.3);
+        }
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 30px;
+        }
+        .hero-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 3px solid rgba(240, 192, 64, 0.3);
+        }
+        
         .metadata {
             background: rgba(255,255,255,0.05);
             border-radius: 10px;
@@ -129,6 +205,19 @@
             border-left: 3px solid rgba(240, 192, 64, 0.3);
             border-right: 3px solid rgba(240, 192, 64, 0.3);
         }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            article {
+                font-size: 1rem;
+            }
+            .audio-player-container {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -138,8 +227,22 @@
             <p class="subtitle">Um conto sobre os povos que habitavam estas terras antes de tudo</p>
         </header>
 
+        <!-- Hero Image -->
+        <img src="conto-imagens/aldeia-tupinamba.png" alt="Aldeia Tupinambá ao entardecer" class="hero-image">
+        <p class="image-caption">Aldeia Tupinambá ao entardecer, com suas ocas e fogueiras rituais</p>
+
         <div class="metadata">
             <p><strong>Contexto histórico:</strong> Este conto se passa nas terras que seriam chamadas de Brasil, alguns anos antes da chegada dos europeus em 1500. Naquela época, estimava-se que entre <strong>2 e 4 milhões de indígenas</strong> habitavam o território, distribuídos em <strong>centenas de etnias</strong> com línguas, costumes e organizações sociais completamente diferentes entre si.</p>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="audio-player-container">
+            <h3>🎧 Ouça a narração do conto</h3>
+            <audio controls preload="metadata">
+                <source src="conto-imagens/narracao_conto_completo.wav" type="audio/wav">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+            <p class="audio-info">Duração aproximada: 2 minutos | Narração em português</p>
         </div>
 
         <article>
@@ -152,6 +255,10 @@
             </div>
 
             <p>O prisioneiro estava amarrado numa das ocas periféricas, guardado por dois jovens guerreiros que ainda não haviam participado de um ritual de antropofagia. Arariboia lembrava-se de como estivera no mesmo lugar, anos atrás, quando capturaram seu primeiro cativo numa incursão ao norte. A ansiedade, o medo, a excitação — tudo se misturava num caldo de emoções que nenhum guerreiro esquecia.</p>
+
+            <!-- Image: Warrior -->
+            <img src="conto-imagens/guerreiro-tupinamba.png" alt="Guerreiro Tupinambá" class="story-image">
+            <p class="image-caption">Guerreiro Tupinambá com pintura corporal de urucum e jenipapo</p>
 
             <p class="dialogue">— Tu estás pensativo esta noite, irmão.</p>
 
@@ -171,6 +278,10 @@
 
             <p class="dialogue">— É verdade — confirmou Pirajibe. — Os mais velhos dizem que somos como as árvores: cada um com suas raízes, mas todos brotando da mesma terra. Cada povo com sua língua, seus costumes, suas terras. Não somos todos iguais, como alguns jovens pensam. Somos diferentes, e essa diferença nos fortalece.</p>
 
+            <!-- Image: Atlantic Forest -->
+            <img src="conto-imagens/mata-atlantica.png" alt="Mata Atlântica pré-colonial" class="story-image">
+            <p class="image-caption">Mata Atlântica ao amanhecer, habitat dos povos indígenas</p>
+
             <div class="section-break">• • •</div>
 
             <p>A noite avançava, e a taba começava a dormir. Arariboia levantou-se e caminhou em direção à oca central, onde o pajé Itamaraca preparava os instrumentos rituais para a cerimônia do dia seguinte. O ancião ergueu os olhos quando o guerreiro entrou, e um sorriso sereno iluminou seu rosto marcado pelo tempo.</p>
@@ -182,6 +293,10 @@
             <p class="dialogue">— Tenho dúvidas, pajé — disse o guerreiro, baixando a voz. — O prisioneiro... ele parece tão jovem. Mal deve ter visto quinze luas de vida.</p>
 
             <p class="dialogue">— A idade do corpo não importa — respondeu Itamaraca, preparando um cachimbo. — O que importa é o espírito. Amanhã, quando o executarmos, seu espírito passará a viver em nós. Não o estaremos matando, mas o incorporando.</p>
+
+            <!-- Image: Pajé -->
+            <img src="conto-imagens/paje-sabedoria.png" alt="Pajé indígena" class="story-image">
+            <p class="image-caption">O pajé, guardião da sabedoria e das tradições ancestrais</p>
 
             <p>O pajé acendeu o cachimbo e aspirou profundamente antes de continuar:</p>
 
@@ -195,7 +310,7 @@
                 <h3>Organização Social dos Povos Indígenas</h3>
                 <ul>
                     <li>As aldeias, chamadas <strong>tabas</strong>, variavam grandemente em tamanho — algumas abrigavam poucas famílias, outras chegavam a milhares de pessoas</li>
-                    <li>O <strong>parentesco</strong> era a base de toda organização social; quem era da família determinava direitos, obrigações e地位</li>
+                    <li>O <strong>parentesco</strong> era a base de toda organização social; quem era da família determinava direitos, obrigações e status</li>
                     <li>Entre os Tupi, a estrutura era <strong>matrilinear</strong> — as crianças pertenciam ao clã da mãe, não do pai</li>
                     <li>A religiosidade era <strong>animista</strong> — acreditava-se que todas as coisas possuíam espírito</li>
                     <li>Os <strong>pajés</strong> eram os intermediários entre o mundo dos vivos e o mundo dos espíritos</li>
@@ -232,6 +347,10 @@
 
             <p>A madrugada chegou silenciosa. Arariboia não havia dormido, mas não se sentia cansado. Quando os primeiros raios de sol pintaram o céu de rosa e dourado, ele já estava pronto — corpo pintado de urucum e jenipapo, adornado com penas de arara e tucano, portando a clava que herdara de seu pai.</p>
 
+            <!-- Image: Ceremony -->
+            <img src="conto-imagens/cerimonia-alvorecer.png" alt="Cerimônia ao amanhecer" class="story-image">
+            <p class="image-caption">A cerimônia ao amanhecer, momento de transformação e honra</p>
+
             <p>A taba inteira se reuniu no centro da aldeia. As mulheres formavam um círculo ao redor da arena, cantando e dançando. As crianças observavam de longe, protegidas pelos mais velhos, que aproveitavam para ensinar os significados de cada parte do ritual. Os guerreiros, pintados e armados, esperavam em silêncio.</p>
 
             <p>O prisioneiro foi trazido para o centro da arena. Mesmo amarrado, mantinha a postura ereta e o olhar firme. Arariboia aproximou-se dele, clava em punho, e por um momento seus olhares se cruzaram novamente.</p>
@@ -263,6 +382,7 @@
         <footer>
             <p>Este conto é uma obra de ficção baseada em informações históricas verificáveis sobre os povos indígenas que habitavam o território brasileiro antes de 1500.</p>
             <p style="margin-top: 15px; font-size: 0.9rem;">Curso de História para ENEM • Aula: Brasil Pré-Colonial - Povos Indígenas</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.4);">Ilustrações geradas por IA • Narração em áudio disponível</p>
         </footer>
     </div>
 </body>
