@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Primeiro Contato - Conto Histórico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            line-height: 1.9;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        header h1 { font-size: 2.5rem; font-weight: normal; margin-bottom: 15px; color: #f0c040; font-style: italic; }
+        header .subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.6); font-style: italic; }
+        .audio-player-container {
+            background: linear-gradient(135deg, rgba(240, 192, 64, 0.15), rgba(240, 140, 64, 0.1));
+            border: 1px solid rgba(240, 192, 64, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .audio-player-container h3 { color: #f0c040; margin-bottom: 15px; font-size: 1.1rem; }
+        .audio-player-container audio { width: 100%; height: 50px; border-radius: 10px; }
+        .audio-player-container .audio-info { margin-top: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+        .story-image { width: 100%; height: auto; border-radius: 15px; margin: 30px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border: 3px solid rgba(240, 192, 64, 0.3); }
+        .image-caption { text-align: center; font-style: italic; color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: -15px; margin-bottom: 30px; }
+        .hero-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border: 3px solid rgba(240, 192, 64, 0.3); }
+        .metadata { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 40px; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+        .metadata strong { color: #f0c040; }
+        article { font-size: 1.15rem; text-align: justify; }
+        article p { margin-bottom: 1.8em; text-indent: 2em; }
+        article p:first-of-type { text-indent: 0; }
+        article p:first-of-type::first-letter { font-size: 4rem; float: left; line-height: 1; margin-right: 15px; color: #f0c040; font-weight: bold; }
+        .dialogue { font-style: italic; color: rgba(255,255,255,0.9); }
+        .section-break { text-align: center; margin: 40px 0; color: rgba(255,255,255,0.3); font-size: 1.5rem; }
+        .info-box { background: linear-gradient(135deg, rgba(240, 192, 64, 0.1), rgba(240, 140, 64, 0.1)); border-left: 4px solid #f0c040; padding: 25px; margin: 40px 0; border-radius: 0 10px 10px 0; }
+        .info-box h3 { color: #f0c040; margin-bottom: 15px; font-size: 1.1rem; }
+        .info-box ul { list-style: none; padding: 0; }
+        .info-box li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .info-box li:before { content: "•"; color: #f0c040; position: absolute; left: 8px; }
+        footer { margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-style: italic; color: rgba(255,255,255,0.5); }
+        .epigraph { text-align: center; font-style: italic; color: rgba(255,255,255,0.6); margin: 30px 0; padding: 20px; border-left: 3px solid rgba(240, 192, 64, 0.3); border-right: 3px solid rgba(240, 192, 64, 0.3); }
+        @media (max-width: 768px) { header h1 { font-size: 1.8rem; } article { font-size: 1rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>O Primeiro Contato</h1>
+            <p class="subtitle">Quando os céus trouxeram estranhos para as terras do pau-brasil</p>
+        </header>
+
+        <!-- Hero Image placeholder -->
+        <div style="background: linear-gradient(135deg, rgba(240, 192, 64, 0.2), rgba(140, 100, 64, 0.2)); height: 300px; border-radius: 15px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; border: 3px solid rgba(240, 192, 64, 0.3);">
+            <p style="color: rgba(255,255,255,0.4); font-style: italic;">Imagem: 1500-1530</p>
+        </div>
+
+        <div class="metadata">
+            <p><strong>Período:</strong> 1500-1530</p>
+            <p><strong>Contexto histórico:</strong> Chegada de Pedro Álvares Cabral em 1500, exploração do pau-brasil, sistema de feitorias, escambo com indígenas, Tratado de Tordesilhas</p>
+        </div>
+
+        <!-- Audio Player placeholder -->
+        <div class="audio-player-container">
+            <h3>🎧 Narração em áudio</h3>
+            <p style="color: rgba(255,255,255,0.6);">Narração disponível em breve</p>
+        </div>
+
+        <article>
+            <p>[Conto narrativo sobre primeiro contato com os portugueses e o início do escambo, tendo Tibiriçá, um jovem Tupiniquim como protagonista. A história transporta o leitor para o período 1500-1530, explorando os aspectos históricos de forma envolvente e educativa para estudantes do ENEM.]</p>
+            
+            <p>Este conto será expandido com a narrativa completa, transportando você para viver a história como se estivesse lá. Acompanhe Tibiriçá, um jovem Tupiniquim nesta jornada pelos tempos 1500-1530.</p>
+        </article>
+
+        <div class="info-box">
+            <h3>Para o Estudante do ENEM</h3>
+            <ul>
+                <li>Período: <strong>1500-1530</strong></li>
+                <li>Contextos principais: Chegada de Pedro Álvares Cabral em 1500, exploração do pau-brasil, sistema de feitorias</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Este conto é uma obra de ficção baseada em informações históricas verificáveis.</p>
+            <p style="margin-top: 15px; font-size: 0.9rem;">Curso de História para ENEM • O Primeiro Contato</p>
+        </footer>
+    </div>
+</body>
+</html>

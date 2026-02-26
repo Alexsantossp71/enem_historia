@@ -1,0 +1,90 @@
+# Cinquenta Anos em Cinco
+
+## Um conto da República Populista Brasileira (1945-1964)
+
+---
+
+O sol escaldante do cerrado batia no rosto de Carlos Mendes enquanto ele contemplava a imensidão avermelhada diante de seus olhos. Estava em abril de 1957, e aquele planalto deserto, há séculos habitado apenas por gado e garimpeiros, seria transformado na nova capital do Brasil.
+
+— Doutor Carlos! — gritou um dos operários à distância. — O governador quer ver o senhor!
+
+Carlos ajustou o capacete e caminhou em direção ao jeep que acabara de estacionar. Não era o governador, mas sim um emissário. A mensagem, porém, era clara: Juscelino Kubitschek viria pessoalmente inspecionar as obras.
+
+Naquela noite, sentado sob uma tenda de lona, Carlos abriu seu diário. "Cinquenta anos em cinco", escreveu, repetindo o slogan que ecoava em todos os cantos do país. Era uma promessa ousada — desenvolver o Brasil em cinco anos o que outras nações levariam meio século para conquistar. E Brasília era a joia da coroa desse projeto.
+
+---
+
+Carlos lembrava-se perfeitamente do dia em que ouvira JK pela primeira vez. Era 1955, e ele ainda trabalhava como engenheiro na construção de estradas em Minas Gerais. O candidato governista discursava no rádio, prometendo industrialização, progresso e uma nova capital no coração do Brasil.
+
+— A capital não pode ficar na costa, isolada do resto do país — dissera Kubitschek com sua voz inconfundível. — O Brasil precisa olhar para seu interior, para sua alma.
+
+Naquela época, Carlos mal imaginava que faria parte da maior empreitada construtiva da história nacional. Mas quando o concurso para engenheiros foi aberto, não hesitou. Deixou a família em Belo Horizonte com a promessa de que, em quatro anos, todos viveriam na nova capital.
+
+---
+
+A construção de Brasília mobilizou o país inteiro. Mais de trinta mil trabalhadores — os candangos — chegaram ao Planalto Central vindos de todos os estados, especialmente do Nordeste. Carlos coordenava uma das equipes responsáveis pelos blocos dos superquadros residenciais.
+
+— Engenheiro, o concreto não está secando direito com esse calor — relatou João, um mestre-de-obras pernambucano que se tornara seu braço direito.
+
+Carlos observou a mistura. A temperatura passava de trinta graus, e o material precisava de cuidados especiais. — Vamos trabalhar à noite então — decidiu. — O projeto não pode parar.
+
+Era assim todos os dias. O ritmo era frenético, quase febril. JK visitava as obras mensalmente, circulando entre os operários, apertando mãos, perguntando sobre as famílias, prometendo escolas e hospitais. Não era apenas um político fazendo campanha — Carlos percebia que aquele homem acreditava genuinamente em cada tijolo colocado.
+
+---
+
+As críticas, no entanto, não tardaram. No Rio de Janeiro, intelectuais e políticos oposicionistas acusavam o projeto de ser uma "fantasia megalomaníaca". O custo elevado, a inflação crescente, o endividamento externo — tudo era motivo de debate acalorado.
+
+Certa tarde, Carlos recebeu uma carta de seu pai, um professor aposentado: *"Meu filho, será que esse sonho não nos custará caro demais? O país vive de empréstimos, e a inflação corrói o salário dos trabalhadores."*
+
+Carlos olhou para o canteiro de obras à sua frente. Via os candangos suados, as máquinas rugindo, os edifícios tomando forma. Pensou em responder, mas preferiu guardar a carta. A história, sabia ele, julgaria os resultados.
+
+---
+
+Em 21 de abril de 1960, Brasília foi inaugurada. Carlos estava na Esplanada dos Ministérios quando JK discursou para uma multidão emocionada. Os aviões da Varig pousaram trazendo autoridades de todo o mundo, e Niemeyer's arquitetura futurista brilhava sob o sol do cerrado.
+
+— Desta cidade, deste local, desta terra, eu lanço o Brasil para o futuro! — proclamou o presidente.
+
+Carlos sentiu lágrimas nos olhos. Quatro anos de trabalho exaustivo, noites mal dormidas, saudade da família. Mas ali estava — uma cidade nascida do nada, símbolo de um Brasil que ousava sonhar grande.
+
+---
+
+Os anos seguintes, porém, trouxeram turbulência. JK terminou seu mandato em janeiro de 1961, deixando uma economia em crise, mas também uma infraestrutura transformada. Jânio Quadros foi eleito prometendo varrer a corrupção, mas renunciou em sete meses. João Goulart assumiu sob suspeitas dos militares, e o país mergulhou em greves, manifestações e polarização.
+
+Carlos, agora morando permanentemente em Brasília com sua família, observava com preocupação. A cidade que ajudara a construir era palco de intrigas políticas. Em 1963, os tanques do exército circularam pela capital durante a tentativa de golpe dos sargentos.
+
+— O senhor acha que vai haver revolução? — perguntou seu filho mais velho, que estudava no recém-inaugurado colégio militar.
+
+Carlos não soube responder. O Brasil que JK prometera — industrializado, desenvolvido, democrático — parecia cada vez mais distante.
+
+---
+
+Em 31 de março de 1964, Carlos acordou com o som de jatos sobrevoando a cidade. Os militares haviam deposto João Goulart. Nas semanas seguintes, viu colegas serem presos, cassados, exilados. O sonho desenvolvimentista dera lugar a um regime de exceção que duraria duas décadas.
+
+Juscelino Kubitschek, o idealizador de Brasília, teve seus direitos políticos cassados em 1966. Partiu para o exílio, deixando para trás a cidade que simbolizava sua maior realização.
+
+---
+
+Décadas depois, já idoso, Carlos caminhava pela Esplanada dos Ministérios com seus netos. Brasília crescera, tornara-se uma metrópole de milhões de habitantes, Patrimônio da Humanidade pela UNESCO.
+
+— Vovô construiu tudo isso? — perguntou a neta mais nova, apontando para o Congresso Nacional.
+
+— Não tudo, minha filha — respondeu Carlos, sorrindo. — Mas ajudei a construir o sonho.
+
+Ele pensou em JK, morto em 1976 num acidente de carro que muitos suspeitaram ter sido sabotagem. Pensou nos candangos, nos operários anônimos, nos engenheiros e arquitetos que acreditaram que o Brasil poderia ser diferente.
+
+A República Populista terminara em tragédia, mas deixara marcas indeléveis. A industrialização avançara, a infraestrutura se expandira, e Brasília permanecia como testemunho de um tempo em que o Brasil ousou sonhar que cinquenta anos podiam caber em cinco.
+
+Carlos olhou para o céu azul do cerrado e sorriu. Valera a pena.
+
+---
+
+**Referências Históricas:**
+- Construção de Brasília (1956-1960)
+- Plano de Metas de JK
+- Inauguração de Brasília em 21 de abril de 1960
+- Golpe Militar de 1964
+- Cassação de JK em 1966
+
+---
+
+*Conto produzido para fins educativos - História do Brasil - ENEM*

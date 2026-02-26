@@ -1,0 +1,73 @@
+# Entre Dois Rios
+
+O sol nascia sobre o horizonte dourado, tingindo de luz as águas calmas do Eufrates. Enkidu respirou fundo o ar matinal, sentindo o aroma de lama e cana que caracterizava sua amada Ur. Aos trinta anos de idade, era um dos escribas mais respeitados do templo de Nanna, o deus da lua, e seu trabalho consistia em registrar tudo: desde as transações comerciais até os decretos reais que chegavam da distante Babilônia.
+
+Aquele dia, porém, seria diferente. O rei havia convocado todos os escribas da cidade para ouvir a leitura de algo monumental — um código de leis que prometia trazer ordem a todas as terras entre os dois rios.
+
+Enkidu atravessou as ruas estreitas de Ur, passando pelas casas de tijolos de barro cozido ao sol. Mulheres lavavam roupas nas margens do rio, enquanto crianças brincavam com bonecas de pano e barcos de juncos. O comércio já fervilhava: mercadores ofereciam tecidos de linho, ânforas de vinho e especiarias trazidas de terras distantes. A Mesopotâmia, essa faixa fértil entre o Tigre e o Eufrates, era o coração pulsante da civilização.
+
+No palácio, o corredor de colunas levava ao salão principal. Enkidu reconheceu muitos rostos conhecidos: Nabu, o mercador de tecidos; Tashmetu, a sacerdotisa de Ishtar; e Shamash, o juiz local, cujas decisões sempre geravam debates acalorados.
+
+— Estamos aqui para testemunhar a justiça — anunciou o mensageiro real, desenrolando um grande tablete de argila. — O rei Hamurabi, senhor da Babilônia, enviou estas leis para que todos conheçam seus direitos e deveres.
+
+Enkidu observou atentamente enquanto o leitor proclamava as leis. Sua mente treinada gravava cada palavra, preparando-se para copiá-las em tabletes menores para distribuição.
+
+*"Se um senhor acusou outro senhor e este imputou contra ele um crime de morte, mas não o comprova, aquele que o acusou será morto."*
+
+Enkidu assentiu. A lei protegia o inocente e punia as falsas acusações.
+
+*"Se um senhor destruiu o olho de um membro da aristocracia, destruirão o seu olho."*
+
+A famosa lei do talião — olho por olho, dente por dente. Shamash, ao lado de Enkidu, murmurou:
+
+— Isso trará ordem. Até hoje, as punições variavam conforme o humor do juiz.
+
+— Ou conforme a riqueza do acusado — completou Enkidu, lembrando-se dos casos que presenciara.
+
+A leitura continuou por horas. Havia leis sobre propriedade, comércio, casamento, divórcio, herança e até sobre a responsabilidade de construtores. Uma lei em particular chamou a atenção de Enkidu:
+
+*"Se um construtor construiu uma casa para um senhor e não consolidou sua estrutura, e a casa que construiu caiu e causou a morte do dono da casa, esse construtor será morto."*
+
+— A responsabilidade é sagrada — sussurrou Enkidu para si mesmo.
+
+Ao fim da leitura, os escribas retiraram-se para cumprir suas tarefas. Enkidu dirigiu-se ao templo, onde o esperavam os aprendizes. Por três dias e três noites, ele trabalhou incansavelmente, gravando cada lei em tabletes de argila molhada, que depois seriam cozidos para a eternidade.
+
+Durante as pausas, ele conversava com os outros escribas sobre o significado daquele código.
+
+— Hamurabi diz que as leis foram dadas pelo deus Shamash — disse Belit, uma jovem escriba. — Para que o forte não oprimisse o fraco.
+
+— É verdade que os castigos ainda são severos — ponderou Enkidu. — Mas agora todos conhecem as consequências de seus atos. A incerteza é que gera injustiça.
+
+Um caso concreto surgiu naquela mesma semana. Um mercador de cereais acusou um agricultor de não entregar a quantidade prometida de trigo. O agricultor alegava que uma inundação do Eufrates destruíra parte de sua colheita.
+
+Perante Shamash, o juiz, Enkidu foi chamado como escriba oficial. Ele registrou os argumentos de ambas as partes e consultou os tabletes do Código.
+
+— Pela lei — declarou Shamash —, se uma tempestade ou inundação destruiu a colheita, o agricultor não é responsável perante o credor. Mas ele deve demonstrar que a perda foi real.
+
+Testemunhas confirmaram a inundação. O agricultor foi absolvido, mas deveria entregar o que restasse de sua colheita.
+
+— A justiça de Hamurabi — disse o agricultor, com lágrimas nos olhos — salvou minha família da escravidão por dívidas.
+
+Enkidu sentiu um arrepio. Aquilo era mais do que leis em argila. Era a promessa de uma sociedade onde o poderoso não poderia esmagar o fraco sem consequências.
+
+Meses depois, quando terminou de copiar todos os tabletes do código, Enkidu subiu ao topo do zigurate de Ur. Dali, podia ver toda a cidade: os canais de irrigação que tornavam o deserto fértil, os campos de cevada e trigo ondulando ao vento, os rebanhos de ovelhas pastando nas margens do rio, e ao longe, a linha prateada do Eufrates, serpenteando em direção ao sul.
+
+A Mesopotâmia era terra de muitas cidades-estado: Ur, Uruk, Lagash, Babilônia. Cada uma com seus deuses, seus templos, seus reis. Mas agora, sob o governo de Hamurabi, uma única lei unia todos os povos entre os dois rios.
+
+Enkidu pensou nas gerações futuras. Seu trabalho como escriba não era apenas registrar o presente, mas preservar o conhecimento para os que viriam depois. Os tabletes de argila que ele preparava durariam séculos, talvez milênios. Alguns escribas em terras distantes, em tempos remotos, leriam aquelas leis e saberiam como os mesopotâmicos buscaram a justiça.
+
+O sol começou a se pôr, tingindo o céu de tons alaranjados e púrpuras. Enkidu desceu do zigurate e caminhou de volta para casa, passando pelo mercado já silencioso. Em sua modesta habitação, sua esposa, Inanna, preparava o jantar: pão de cevada, peixe seco e cerveja.
+
+— O trabalho está terminado? — ela perguntou.
+
+— Sim — respondeu Enkidu, sentando-se para comer. — O Código de Hamurabi agora vive em Ur. E enquanto houver escribas para copiá-lo, a justiça jamais morrerá.
+
+Naquela noite, Enkidu sonhou com os dois rios. Em seu sonho, o Tigre e o Eufrates corriam eternamente, suas águas fertilizando a terra e nutrindo a civilização. E nas margens desses rios, geração após geração de escribas, juízes, agricultores e mercadores viviam sob a proteção da lei.
+
+Quando acordou, antes mesmo do nascer do sol, Enkidu já estava pronto para continuar seu trabalho. Pois ele sabia que sua missão não era apenas gravar palavras na argila, mas construir, lei após lei, um mundo mais justo para todos os que viviam entre os dois rios.
+
+---
+
+**Contexto Histórico:**
+
+A Mesopotâmia ("terra entre rios") foi uma região histórica localizada entre os rios Tigre e Eufrates, no atual Iraque. O Código de Hamurabi (cerca de 1750 a.C.) foi um dos primeiros conjuntos de leis escritas da história, estabelecendo princípios de justiça que influenciaram civilizações posteriores. Os escribas eram fundamentais para a sociedade mesopotâmica, responsáveis por registrar leis, transações comerciais e textos religiosos em tabletes de argila com escrita cuneiforme.

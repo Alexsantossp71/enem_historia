@@ -1,0 +1,99 @@
+# As Correntes do Atlântico
+
+**Conto Histórico Educativo para ENEM**
+
+---
+
+A aldeia de Kwame erguia-se às margens do rio Volta, onde o sol dourado beijava as terras do que hoje chamamos de Gana. O jovem de dezessete anos vivia entre colheitas de inhame e histórias dos ancestrais, sem imaginar que seu nome significava "nascido no sábado" — e que um trágico sábado mudaria para sempre seu destino.
+
+Era o ano de 1640. Os tambores ecoavam na aldeia quando navios portugueses apareceram no horizonte. Kwame lembrou das histórias sobre homens de pele clara que vinham trocar tecidos e contas de vidro por ouro e marfim. Mas desta vez, não havia trocas. Havia correntes.
+
+— Pai! — gritou Kwame quando os homens armados invadiram a aldeia.
+
+A violência foi rápida e brutal. Em minutos, dezenas de homens, mulheres e crianças foram acorrentados, incluindo Kwame. Seu pai resistiu e caiu sob as espadas dos invasores. Este era o funcionamento do tráfico negreiro: expedições de caça aos africanos, muitas vezes com a cumplicidade de líderes locais rivalizando por poder.
+
+A marcha até a costa durou semanas. Amontoados como animais, os prisioneiros caminhavam sob o sol escaldante, aqueles que fraquejavam eram deixados para morrer. Chegaram a um forte português em Elmina, uma das principais fortalezas do litoral africana onde milhares de africanos eram reunidos antes da travessia.
+
+Foi ali que Kwame ouviu pela primeira vez o termo que definiria sua nova existência: "peça da Índia". Esta era a unidade de medida do comércio de seres humanos — um homem adulto valia uma peça, uma criança valia meia peça. O tráfico atlântico transformava pessoas em mercadorias.
+
+---
+
+O navio negreiro era o que os historiadores chamavam de "tumbeira" — navio tumular. Kwame foi jogado no porão junto com mais trezentos africanos, amontoados em espaços tão exíguos que mal podiam se mover. O cheiro de vômito, fezes e suor era insuportável.
+
+— Não se entregue, irmão — sussurrou um homem ao seu lado, que disse chamar-se Obi. — Nossos ancestrais nos observam.
+
+A travessia do Atlântico durou quarenta dias. Kwame testemunhou corpos sendo lançados ao mar quando a disenteria e o escorbuto ceifavam vidas. Calcula-se que cerca de 20% dos africanos morriam durante a travessia. Para os europeus, eram "perdas aceitáveis" do lucrativo negócio.
+
+Durante as noites, no escuro do porão, Kwame aprendeu com Obi sobre o destino que os aguardava:
+
+— Vão nos levar para uma terra chamada Brasil. Lá, trabalharemos nas lavouras de cana-de-açúcar, nas minas de ouro. Mas nunca se esqueça: você não nasceu escravo. A escravidão é uma condição imposta, não sua natureza.
+
+---
+
+Quando o navio ancorou em Salvador, na Bahia, Kwame viu pela primeira vez a terra que seria seu cativeiro. A cidade fervilhava de atividade — portugueses, mamelucos, e milhares de africanos como ele.
+
+O leilão aconteceu no Largo do Pelourinho. Kwame foi examinado como um animal: dentes verificadas, músculos apalpados, idade estimada. Um senhor de engenho chamado Domingos Afonso o comprou por trezentos mil-réis, uma fortuna na época.
+
+— Você agora se chama João — disse o senhor. — Esqueça seu nome africano.
+
+Mas Kwame guardou seu nome no coração, como guardava as memórias de sua terra natal. No engenho de cana-de-açúcar em Pernambuco, descobriu a dureza do trabalho: cortar cana sob o sol ardente, moer na engenhoca, produzir o açúcar que alimentava a riqueza de Portugal e movia a economia colonial brasileira.
+
+Os dias eram longos, as punições severas. Kwame viu companheiros serem açoitados publicamente no pelourinho, marcados com ferro em brasa como animais, tiveram suas orelhas cortadas por tentativas de fuga. O código de leis permitia castigos "moderados", mas a definição de moderado ficava a cargo do senhor.
+
+Foi numa noite de lua cheia que Kwame conheceu Teresa, uma mulher angolana que trabalhava na casa-grande.
+
+— Há lugares — ela sussurrou — onde somos livres. Lugares chamados quilombos. Comunidades de fugitivos nas matas.
+
+---
+
+O Quilombo dos Palmares era o maior e mais famoso desses refúgios. Localizado na Serra da Barriga, em Alagoas, abrigava milhares de africanos e seus descendentes que haviam escapado da escravidão. Era uma verdadeira república negra, com organização própria, agricultura, comércio e defesa.
+
+Kwame planejou sua fuga por meses. Aprendeu os caminhos da mata, os sinais dos tambores, os esconderijos. Quando finalmente escapou, percorreu quilômetros pela caatinga até encontrar os sentinelas de Palmares.
+
+No quilombo, Kwame redescobriu sua dignidade. Aprendeu que Palmares resistia há décadas aos ataques dos holandeses e portugueses. Lá conheceu Zumbi, o jovem líder que se tornaria o símbolo máximo da resistência negra no Brasil.
+
+— A liberdade não é dada, é conquistada — disse Zumbi aos guerrilheiros reunidos. — E a defendemos com a vida.
+
+Kwame treinou na arte da guerra, aprendendo a usar a capoeira — luta disfarçada de dança — e as armas roubadas dos senhores. Palmares era um pesadelo para os engenhos: seus habitantes realizavam incursões para libertar outros escravos e abastecer o quilombo.
+
+---
+
+A história registra que Palmares resistiu a dezenas de expedições militares entre 1590 e 1694. Mas o poder colonial finalmente organizou uma força massiva sob o comando de Domingos Jorge Velho, um bandeirante paulista.
+
+Kwame lutou na batalha final. Viu companheiros caírem, viu as palafitas de Cerca do Macaco, a última aldeia de Palmares, serem incendiadas. Zumbi foi capturado e morto em 20 de novembro de 1695 — data que hoje é o Dia Nacional da Consciência Negra.
+
+Kwame sobreviveu. Ferido, escapou para as matas, onde encontrou outros sobreviventes. A resistência não morreria com Palmares. Outros quilombos surgiriam, outras formas de luta seriam inventadas: o suicídio coletivo, a sabotagem, a insurreição.
+
+---
+
+Anos depois, já velho, Kwame sentou-se com os mais jovens para contar sua história. O tráfico negreiro ainda operava, trazendo mais africanos para o cativeiro. A Abolição só viria em 1888, quase dois séculos depois de sua captura.
+
+— Nunca se esqueçam — disse ele — de que fomos reis, guerreiros, agricultores, artistas. De que tínhamos nomes, famílias, terras. A escravidão não nos definiu. Nossa resistência sim.
+
+Kwame morreu livre, nas terras de um pequeno quilombo que ajudou a fundar. Seu corpo foi enterrado sob uma gameleira, como mandava a tradição de seu povo.
+
+---
+
+**Contexto Histórico para o ENEM**
+
+Este conto aborda temas fundamentais para o exame:
+
+1. **Tráfico Negreiro Transatlântico** (séc. XVI-XIX): Cerca de 4,8 milhões de africanos foram trazidos ao Brasil, o maior destino do tráfico mundial.
+
+2. **Navios Tumbeiros**: As condições da travessia eram tão precárias que a mortalidade chegava a 20%.
+
+3. **Economia Açucareira**: O Brasil foi o maior produtor mundial de açúcar nos séculos XVI e XVII, utilizando mão de obra escrava.
+
+4. **Quilombos**: Comunidades de resistência formadas por escravos fugitivos. Palmares foi o maior, com população estimada em 20 mil pessoas.
+
+5. **Zumbi dos Palmares**: Líder que resistiu à destruição do quilombo, tornado símbolo da resistência negra.
+
+6. **Resistência Escrava**: Incluía fugas, formação de quilombos, suicídios, sabotagens e revoltas (como a Revolta dos Malês na Bahia).
+
+7. **Legado**: A escravidão deixou marcas profundas na sociedade brasileira, refletidas nas desigualdades raciais ainda presentes.
+
+---
+
+*Palavras: aproximadamente 1.150*
+
+*Autoria: Conto educativo para preparação ENEM*
