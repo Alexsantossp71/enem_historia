@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/modulos/layout,_N_T_/modulos/[modulo]/layout,_N_T_/modulos/[modulo]/page,_N_T_/modulos/historia-africa/"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/modulos/$d$modulo/__PAGE__",
+    "/modulos/$d$modulo",
+    "/modulos",
+    "/_index",
+    "/_head"
+  ]
+}
