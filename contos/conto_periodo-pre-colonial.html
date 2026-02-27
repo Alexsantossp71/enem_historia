@@ -12,83 +12,88 @@
             min-height: 100vh;
             color: #e8e8e8;
             line-height: 1.9;
+            padding: 20px;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        header h1 { font-size: 2.5rem; font-weight: normal; margin-bottom: 15px; color: #f0c040; font-style: italic; }
-        header .subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.6); font-style: italic; }
-        .audio-player-container {
-            background: linear-gradient(135deg, rgba(240, 192, 64, 0.15), rgba(240, 140, 64, 0.1));
-            border: 1px solid rgba(240, 192, 64, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        .audio-player-container h3 { color: #f0c040; margin-bottom: 15px; font-size: 1.1rem; }
-        .audio-player-container audio { width: 100%; height: 50px; border-radius: 10px; }
-        .audio-player-container .audio-info { margin-top: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
-        .story-image { width: 100%; height: auto; border-radius: 15px; margin: 30px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border: 3px solid rgba(240, 192, 64, 0.3); }
-        .image-caption { text-align: center; font-style: italic; color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: -15px; margin-bottom: 30px; }
-        .hero-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border: 3px solid rgba(240, 192, 64, 0.3); }
-        .metadata { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 40px; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
-        .metadata strong { color: #f0c040; }
-        article { font-size: 1.15rem; text-align: justify; }
-        article p { margin-bottom: 1.8em; text-indent: 2em; }
-        article p:first-of-type { text-indent: 0; }
-        article p:first-of-type::first-letter { font-size: 4rem; float: left; line-height: 1; margin-right: 15px; color: #f0c040; font-weight: bold; }
-        .dialogue { font-style: italic; color: rgba(255,255,255,0.9); }
-        .section-break { text-align: center; margin: 40px 0; color: rgba(255,255,255,0.3); font-size: 1.5rem; }
-        .info-box { background: linear-gradient(135deg, rgba(240, 192, 64, 0.1), rgba(240, 140, 64, 0.1)); border-left: 4px solid #f0c040; padding: 25px; margin: 40px 0; border-radius: 0 10px 10px 0; }
-        .info-box h3 { color: #f0c040; margin-bottom: 15px; font-size: 1.1rem; }
-        .info-box ul { list-style: none; padding: 0; }
-        .info-box li { padding: 8px 0; padding-left: 25px; position: relative; }
-        .info-box li:before { content: "•"; color: #f0c040; position: absolute; left: 8px; }
-        footer { margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-style: italic; color: rgba(255,255,255,0.5); }
-        .epigraph { text-align: center; font-style: italic; color: rgba(255,255,255,0.6); margin: 30px 0; padding: 20px; border-left: 3px solid rgba(240, 192, 64, 0.3); border-right: 3px solid rgba(240, 192, 64, 0.3); }
-        @media (max-width: 768px) { header h1 { font-size: 1.8rem; } article { font-size: 1rem; } }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #f0c040; font-size: 2rem; margin-bottom: 10px; font-style: italic; text-align: center; }
+        h2 { color: #f0c040; font-size: 1.2rem; margin: 25px 0 15px; opacity: 0.8; text-align: center; font-weight: normal; }
+        h3 { color: #f0c040; font-size: 1.1rem; margin: 20px 0 10px; }
+        p { margin-bottom: 1.5em; text-align: justify; text-indent: 2em; }
+        p:first-of-type { text-indent: 0; }
+        p:first-of-type::first-letter { font-size: 3rem; float: left; line-height: 1; margin-right: 10px; color: #f0c040; }
+        strong { color: #f0c040; }
+        em { font-style: italic; }
+        hr { border: none; border-top: 1px solid rgba(255,255,255,0.2); margin: 30px 0; }
+        ul, ol { margin: 20px 0; padding-left: 25px; }
+        li { margin-bottom: 8px; }
+        article { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; }
+        .back-link { display: block; text-align: center; margin: 25px 0; color: #f0c040; text-decoration: none; padding: 12px 25px; background: rgba(240, 192, 64, 0.1); border: 1px solid rgba(240, 192, 64, 0.3); border-radius: 8px; }
+        header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-style: italic; }
+        @media (max-width: 600px) { h1 { font-size: 1.5rem; } body { padding: 15px; } }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>O Primeiro Contato</h1>
-            <p class="subtitle">Quando os céus trouxeram estranhos para as terras do pau-brasil</p>
+            <h2>Um conto sobre o Período Pré-Colonial brasileiro (1500-1530)</h2>
         </header>
-
-        <!-- Hero Image placeholder -->
-        <div style="background: linear-gradient(135deg, rgba(240, 192, 64, 0.2), rgba(140, 100, 64, 0.2)); height: 300px; border-radius: 15px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; border: 3px solid rgba(240, 192, 64, 0.3);">
-            <p style="color: rgba(255,255,255,0.4); font-style: italic;">Imagem: 1500-1530</p>
-        </div>
-
-        <div class="metadata">
-            <p><strong>Período:</strong> 1500-1530</p>
-            <p><strong>Contexto histórico:</strong> Chegada de Pedro Álvares Cabral em 1500, exploração do pau-brasil, sistema de feitorias, escambo com indígenas, Tratado de Tordesilhas</p>
-        </div>
-
-        <!-- Audio Player placeholder -->
-        <div class="audio-player-container">
-            <h3>🎧 Narração em áudio</h3>
-            <p style="color: rgba(255,255,255,0.6);">Narração disponível em breve</p>
-        </div>
-
         <article>
-            <p>[Conto narrativo sobre primeiro contato com os portugueses e o início do escambo, tendo Tibiriçá, um jovem Tupiniquim como protagonista. A história transporta o leitor para o período 1500-1530, explorando os aspectos históricos de forma envolvente e educativa para estudantes do ENEM.]</p>
-            
-            <p>Este conto será expandido com a narrativa completa, transportando você para viver a história como se estivesse lá. Acompanhe Tibiriçá, um jovem Tupiniquim nesta jornada pelos tempos 1500-1530.</p>
+            <hr>
+            <p>Tibiriçá despertou antes do sol, como fazia todas as manhãs. Aos dezesseis invernos, o jovem Tupiniquim já conhecia cada senda da mata que cercava sua aldeia, construída à beira de um grande rio que os anciãos chamavam de *Mar-Canhambu* — o mar que corre. Seu pai, Piatã, cacique do grupo, sempre dizia que aquele era um lugar abençoado pelos deuses, onde a terra era fértil e as águas generosas.</p>
+            <p>Naquela manhã de abril de 1500, porém, algo estava diferente. Tibiriçá sentiu-o no ar, uma inquietação que vinha do mar. Os pássaros cantavam de forma estranha, e as ondas batiam na costa com um ritmo que ele não reconhecia.</p>
+            <p>— Pai! — gritou ele, correndo em direção à oca principal. — Há algo nas águas grandes!</p>
+            <p>Piatã saiu com passo firme, seguido pelos guerreiros mais experientes. Ao longe, no horizonte, avistaram o que parecia ser uma nuvem branca flutuando sobre as águas. Mas não era nuvem. Eram velas — enormes, brancas, como nada que jamais tivessem visto.</p>
+            <p>— São os filhos do trovão — murmurou o pajé, tremendo. — Os que viriam do além-mar.</p>
+            <p>Os anciãos contavam histórias antigas, profecias de seres que chegariam das águas profundas. Mas Tibiriçá, com a curiosidade própria de sua idade, não sentia medo. Sentia fascínio.</p>
+            <p>Quando as grandes canoas — pois aquilo só podiam ser canoas gigantescas — ancoraram ao largo, o jovem Tupiniquim estava entre os primeiros a se aproximar da praia. De dentro daquelas estruturas de madeira desceram homens de pele clara, cabelos compridos e rostos cobertos por pelos estranhos. Vestiam roupas coloridas e carregavam objetos de metal que brilhavam ao sol.</p>
+            <p>Tibiriçá observou tudo com olhos atentos. Viu quando um dos homens de pele clara — alto, de barba negra e olhar desconfiado — ergueu um bastão de madeira escura e o estendeu para Piatã. Seu pai hesitou, mas aceitou o objeto. Era pesado, denso, de cor avermelhada por dentro.</p>
+            <p>— *Pau-brasil* — disse o homem estrangeiro, apontando para a árvore que crescia em abundância nas matas ao redor. Depois, repetiu o gesto várias vezes, batendo no peito: — *Pau-brasil. Pau-brasil.*</p>
+            <p>Piatã compreendeu. Os visitantes queriam aquela madeira. Era um pau que soltava uma tinta vermelha, que os Tupiniquim usavam para pintar o corpo em cerimônias sagradas. Os estrangeiros pareciam valorizá-la muito.</p>
+            <p>Nas semanas que se seguiram, Tibiriçá aprendeu a língua dos visitantes aos poucos. Eram portugueses, vinham de uma terra distante chamada Portugal, e aquele homem alto de barba negra chamava-se Diogo. Aprendera que a frota era comandada por um fidalgo chamado Pedro Álvares Cabral, que havia partido de Lisboa com destino às Índias, mas que — por desígnios que Tibiriçá não compreendia totalmente — acabara por aportar naquelas terras.</p>
+            <p>— Nosso rei quer estas terras — explicou Diogo, através de gestos e palavras soltas. — Vamos construir uma feitoria. Uma casa grande para guardar o pau-brasil.</p>
+            <p>O jovem Tupiniquim não entendia bem o conceito de "rei" ou de "feitoria", mas percebeu rapidamente o que aquilo significava em termos práticos: troca. Os portugueses traziam objetos que fascinavam sua gente — facas de metal que cortavam melhor que pedras polidas, machados que derrubavam árvores em minutos, espelhos que mostravam o próprio rosto, contas coloridas que as mulheres adoravam.</p>
+            <p>Em troca, pediam pau-brasil. Muito pau-brasil.</p>
+            <p>— Tibiriçá, venha ver — chamou-o sua irmã Aracy certa manhã. Ela segurava um pedaço de tecido colorido, liso como a superfície da água calma. — Isto é mais macio que as plumas do guará.</p>
+            <p>O jovem passou os dedos pelo tecido. Era diferente de tudo o que conheciam. Os Tupiniquim faziam suas roupas de fibras de palmeira e penas de aves, mas aquele material era novo, estranho e desejável.</p>
+            <p>— O que eles querem em troca? — perguntou Aracy.</p>
+            <p>— Pau-brasil — respondeu Tibiriçá. — Três toras por um machado. Cinco por um desses tecidos.</p>
+            <p>O escambo, como Diogo chamava aquela troca, estabeleceu-se rapidamente. Tibiriçá tornou-se um dos principais intermediários entre seu povo e os portugueses. Aprendeu algumas palavras em português, ensinou palavras em Tupi aos estrangeiros. Ajudava a organizar as equipes que cortavam as árvores e carregavam as toras até a praia.</p>
+            <p>Mas nem tudo era harmonia. Tibiriçá percebeu que os portugueses eram muitos, e chegavam mais a cada ano. Em 1502, uma expedição comandada por Gonçalo Coelho trouxe Amerigo Vespucci, um homem estudioso que andava pela mata anotando tudo o que via. Em 1503, chegou outra frota. Depois outra. E outra.</p>
+            <p>— Pai — disse Tibiriçá certa noite, sentado ao redor da fogueira — os homens de além-mar ficam mais numerosos. Suas feitorias crescem. A mata diminui.</p>
+            <p>Piatá assentiu, pesaroso.</p>
+            <p>— O pau-brasil é finito, filho. Cortamos mais do que a terra consegue repor. E os portugueses não param de chegar.</p>
+            <p>— O que faremos quando a madeira acabar?</p>
+            <p>O cacique não respondeu. Naquele silêncio, Tibiriçá compreendeu algo que o aterrorizou: seu povo não sabia o que fazer. Os Tupiniquim viviam em harmonia com a terra, tirando apenas o necessário. Os portugueses pareciam querer tudo.</p>
+            <p>Os anos passaram. Tibiriçá tornou-se um homem. Viu sua aldeia transformar-se. Alguns de seu povo passaram a viver nas proximidades da feitoria, aprendendo costumes estranhos. Outros afastaram-se para o interior, buscando fugir daqueles homens brancos que chegavam em números cada vez maiores.</p>
+            <p>Em 1516, quando uma expedição de Cristóvão Jacques chegou com ordens de proteger a costa dos navios franceses que também começavam a aparecer, Tibiriçá já não era mais o jovem curioso de 1500. Era um homem que havia visto seu mundo mudar para sempre.</p>
+            <p>— Eles chamam esta terra de Brasil — disse ele para seus filhos, apontando para o horizonte onde as naus portuguesas ancoravam. — Nomearam-na pela madeira que nos pediram. Mas isto não é apenas pau-brasil. É nossa casa. Nossa história. Nossa vida.</p>
+            <p>Naquela noite, Tibiriçá olhou para as estrelas — as mesmas que guiavam os navegadores portugueses através do oceano — e pensou no futuro. Os anciãos diziam que nada permanecia igual, que o tempo era um rio que nunca parava de correr. Talvez tivessem razão.</p>
+            <p>Os portugueses trouxeram objetos novos, palavras novas, costumes novos. Mas também trouxeram mudanças que Tibiriçá não sabia como medir. O escambo, que parecia uma troca justa, começava a mostrar seu verdadeiro rosto: os indígenas trabalhavam cada vez mais, e os portugueses ficavam cada vez mais tempo.</p>
+            <p>Em 1530, quando Martim Afonso de Sousa chegou com a primeira expedição colonizadora oficial, Tibiriçá já era um ancião. Seus cabelos negros haviam encanecido, e suas pernas já não corriam pela mata como antes. Mas sua mente permanecia afiada.</p>
+            <p>— Avô — perguntou seu neto, um menino de olhos brilhantes — os homens de pele clara ficaram para sempre?</p>
+            <p>Tibiriçá olhou para o menino, depois para as naus que se avistavam ao longe. Lembrou-se daquele dia de abril de 1500, quando vira as primeiras velas brancas no horizonte. Lembrou-se de sua curiosidade, de sua inocência, de sua falta de medo.</p>
+            <p>— Sim, neto — respondeu, com a voz carregada de histórias não contadas. — Ficaram. E agora começamos a entender o que isso significa.</p>
+            <p>O velho Tupiniquim fechou os olhos e pensou em todos os pau-brasil que haviam sido cortados, em todas as toras que haviam sido carregadas, em todas as facas e machados e espelhos que haviam sido trocados. Pensou em sua aldeia, que agora era diferente. Pensou em seu povo, que aprendia novas palavras e esquecia antigas histórias.</p>
+            <p>O primeiro contato, compreendeu tarde demais, não era apenas um encontro de povos. Era o início de uma transformação que mudaria tudo para sempre.</p>
+            <hr>
+            <p>**Fim**</p>
+            <hr>
+            <h2>Contexto Histórico para Estudantes do ENEM</h2>
+            <p>Este conto aborda o **Período Pré-Colonial** brasileiro (1500-1530), caracterizado por:</p>
+            <li>**Chegada de Pedro Álvares Cabral (1500)**: A frota portuguesa, a caminho das Índias, aportou no litoral brasileiro em 22 de abril de 1500, iniciando o contato entre europeus e povos indígenas.</li>
+            <li>**Sistema de Feitorias**: Estruturas de armazenamento e comércio estabelecidas no litoral para guardar o pau-brasil e organizar o escambo com os indígenas.</li>
+            <li>**Escambo**: Sistema de troca em que indígenas forneciam pau-brasil em troca de objetos manufaturados europeus (machados, facas, espelhos, contas, tecidos).</li>
+            <li>**Exploração do Pau-brasil**: Primeira atividade econômica portuguesa no Brasil. A madeira, rica em brasina, era utilizada na Europa para tingimento de tecidos.</li>
+            <li>**Expedições Guarda-Costas**: Missões portuguesas para proteger o litoral de corsários franceses que tentavam contrabandear pau-brasil.</li>
+            <li>**Transição para Colonização**: Em 1530, com a expedição de Martim Afonso de Sousa, inicia-se a colonização sistemática, marcando o fim do período pré-colonial.</li>
+            <p>**Conceitos-chave para o ENEM**: Monopólio real do pau-brasil, relações iniciais luso-indígenas, ausência de colonização efetiva no período, ocupação do litoral, resistência e adaptação indígena.</p>
         </article>
-
-        <div class="info-box">
-            <h3>Para o Estudante do ENEM</h3>
-            <ul>
-                <li>Período: <strong>1500-1530</strong></li>
-                <li>Contextos principais: Chegada de Pedro Álvares Cabral em 1500, exploração do pau-brasil, sistema de feitorias</li>
-            </ul>
-        </div>
-
+        <a href="../modulos/" class="back-link">← Voltar aos Módulos</a>
         <footer>
             <p>Este conto é uma obra de ficção baseada em informações históricas verificáveis.</p>
-            <p style="margin-top: 15px; font-size: 0.9rem;">Curso de História para ENEM • O Primeiro Contato</p>
+            <p style="margin-top: 10px;">Curso de História para ENEM</p>
         </footer>
     </div>
 </body>
