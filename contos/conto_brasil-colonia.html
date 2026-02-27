@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conto: ⚓ O Segredo do Engenho - Brasil Colonia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #e8e8e8; min-height: 100vh; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+        header { text-align: center; padding: 3rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; }
+        h1 { font-size: 2.5rem; background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+        .subtitle { color: #888; font-style: italic; }
+        .audio-player { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .play-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; transition: all 0.3s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn.playing { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .speed-controls { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .speed-btn { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #e8e8e8; cursor: pointer; font-size: 0.85rem; }
+        .speed-btn:hover, .speed-btn.active { background: rgba(139, 92, 246, 0.3); }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); width: 0%; transition: width 0.1s; }
+        .status-text { text-align: center; color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+        .story { background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; }
+        .story p { margin-bottom: 1.5rem; text-indent: 2rem; text-align: justify; transition: background 0.3s; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .story p.highlight { background: rgba(139, 92, 246, 0.2); }
+        .story p:first-child::first-letter { font-size: 4rem; float: left; line-height: 1; margin-right: 0.5rem; color: #f39c12; font-weight: bold; }
+        .concepts { background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 2rem; }
+        .concepts h3 { color: #60a5fa; margin-bottom: 1rem; font-size: 1.1rem; }
+        .concepts ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .concepts li { background: rgba(59, 130, 246, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; color: #93c5fd; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; margin-top: 1rem; }
+        footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header><h1>⚓ O Segredo do Engenho</h1><p class="subtitle">Um conto do Brasil Colônia</p></header>
+        <div class="audio-player">
+            <div class="player-controls"><button class="play-btn" id="playBtn" onclick="togglePlay()">▶️</button></div>
+            <div class="speed-controls">
+                <span style="color: #888; font-size: 0.9rem;">Velocidade:</span>
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p class="status-text" id="statusText">Clique para ouvir</p>
+        </div>
+        <div class="concepts">
+            <h3>📚 Conceitos-chave:</h3>
+            <ul><li>Escravidão</li><li>Açúcar</li><li>Engenho</li><li>Resistência</li><li>Quilombos</li></ul>
+        </div>
+        <div class="story" id="storyText">
+            <p id="p1">Jorge aprendeu a ler escondido. No engenho de açúcar, escravos não podiam ter conhecimento - isso era perigoso. Mas ele observava as lições do filho do senhor.</p>
+            <p id="p2">Você vai nos libertar, sussurrava Zumbi em seus sonhos. Jorge sabia que a liberdade precisava ser mais que sonho. Ele começou a ensinar outros escravos a ler.</p>
+            <p id="p3">Quando a notícia dos quilombos chegou, Jorge viu esperança. Não era apenas fuga - era construção de uma nova sociedade onde negros podiam viver como seres humanos.</p>
+            <p id="p4">Sua oportunidade veio numa noite de tempestade. Jorge guiou um grupo até Palmares. A viagem foi brutal, mas os que chegaram encontraram algo precioso: dignidade.</p>
+            <p id="p5">Jorge tornou-se professor no quilombo, ensinando a história que os senhores tentavam apagar.</p>
+            
+        </div>
+        <a href="/historia_enem/aula/brasil-colonia" class="back-link">← Voltar para a aula</a>
+        <footer><p>História para ENEM - Conto Histórico</p></footer>
+    </div>
+    <script>
+        const paragraphs = [document.getElementById("p1"), document.getElementById("p2"), document.getElementById("p3"), document.getElementById("p4"), document.getElementById("p5")];
+        const texts = paragraphs.map(id => document.getElementById(id).innerText);
+        let currentParagraph = 0, isPlaying = false, speechRate = 1, utterance = null;
+        function togglePlay() { if (isPlaying) stopSpeech(); else startSpeech(); }
+        function startSpeech() {
+            if (!('speechSynthesis' in window)) { alert('Navegador não suporta voz.'); return; }
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '⏸️';
+            document.getElementById('playBtn').classList.add('playing');
+            document.getElementById('statusText').innerText = 'Narrando...';
+            speakParagraph(currentParagraph);
+        }
+        function speakParagraph(index) {
+            if (index >= texts.length || !isPlaying) { stopSpeech(); currentParagraph = 0; return; }
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+            paragraphs[index].classList.add('highlight');
+            paragraphs[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            utterance = new SpeechSynthesisUtterance(texts[index]);
+            utterance.lang = 'pt-BR';
+            utterance.rate = speechRate;
+            document.getElementById('progressFill').style.width = ((index + 1) / texts.length) * 100 + '%';
+            utterance.onend = () => { currentParagraph++; if (isPlaying) speakParagraph(currentParagraph); };
+            utterance.onerror = () => stopSpeech();
+            speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() {
+            isPlaying = false; speechSynthesis.cancel();
+            document.getElementById('playBtn').innerHTML = '▶️';
+            document.getElementById('playBtn').classList.remove('playing');
+            document.getElementById('statusText').innerText = 'Clique para ouvir';
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+        }
+        function setSpeed(speed) {
+            speechRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (isPlaying) { speechSynthesis.cancel(); speakParagraph(currentParagraph); }
+        }
+        window.onbeforeunload = () => speechSynthesis.cancel();
+    </script>
+</body>
+</html>
