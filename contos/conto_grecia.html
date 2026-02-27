@@ -81,6 +81,19 @@
             margin-top: 2rem;
             color: #666;
         }
+        .audio-player { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .play-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; transition: all 0.3s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn.playing { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .speed-controls { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .speed-btn { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #e8e8e8; cursor: pointer; font-size: 0.85rem; }
+        .speed-btn:hover, .speed-btn.active { background: rgba(139, 92, 246, 0.3); }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); width: 0%; transition: width 0.1s; }
+        .status-text { text-align: center; color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+        .story p { transition: background 0.3s; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .story p.highlight { background: rgba(139, 92, 246, 0.2); }
     </style>
 </head>
 <body>
@@ -90,22 +103,40 @@
             <p class="subtitle">Um conto da Grécia Antiga</p>
         </header>
 
+        <!-- Player de Áudio -->
+        <div class="audio-player">
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">▶️</button>
+            </div>
+            <div class="speed-controls">
+                <span style="color: #888; font-size: 0.9rem;">Velocidade:</span>
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="status-text" id="statusText">Clique para ouvir a narração</p>
+        </div>
+
         <div class="story">
-            <p>Tucídides entrou na Ágora de Atenas sentindo o peso da responsabilidade em seus ombros. Aos trinta anos, pela primeira vez em sua vida, ele poderia votar. Couldia participar da Eclésia, a assembleia que governava a cidade. Couldia ajudar a decidir o destino de milhares de pessoas.</p>
+            <p id="p1">Tucídides entrou na Ágora de Atenas sentindo o peso da responsabilidade em seus ombros. Aos trinta anos, pela primeira vez em sua vida, ele poderia votar. Couldia participar da Eclésia, a assembleia que governava a cidade. Couldia ajudar a decidir o destino de milhares de pessoas.</p>
 
-            <p>A democracia ateniense não surgira do nada. Tucídides crescera ouvindo as histórias de como Drácon escrevera as primeiras leis, de como Sólon liberara os camponeses das dívidas, de como Clístenes reorganizara as tribos para dar poder ao povo. Cada geração lutara para expandir os direitos dos cidadãos.</p>
+            <p id="p2">A democracia ateniense não surgira do nada. Tucídides crescera ouvindo as histórias de como Drácon escrevera as primeiras leis, de como Sólon liberara os camponeses das dívidas, de como Clístenes reorganizara as tribos para dar poder ao povo. Cada geração lutara para expandir os direitos dos cidadãos.</p>
 
-            <p>Naquele dia, a assembleia discutia uma questão crucial: enviar navios para defender uma cidade-estado aliada contra os persas. Tucídides sabia que muitos atenienses temiam o conflito. Os persas eram poderosos, seu exército parecia infindável. Mas Péricles falara com tanta convicção sobre a importância da liberdade que Tucídides sentiu-se inspirado.</p>
+            <p id="p3">Naquele dia, a assembleia discutia uma questão crucial: enviar navios para defender uma cidade-estado aliada contra os persas. Tucídides sabia que muitos atenienses temiam o conflito. Os persas eram poderosos, seu exército parecia infindável. Mas Péricles falara com tanta convicção sobre a importância da liberdade que Tucídides sentiu-se inspirado.</p>
 
-            <p>"Não lutamos apenas por nós", dissera Péricles. "Lutamos por um ideal: que os cidadãos livres podem governar a si mesmos. Que cada homem tem direito a voz nas decisões que afetam sua vida. Que a lei deve ser igual para todos, ricos e pobres."</p>
+            <p id="p4">"Não lutamos apenas por nós", dissera Péricles. "Lutamos por um ideal: que os cidadãos livres podem governar a si mesmos. Que cada homem tem direito a voz nas decisões que afetam sua vida. Que a lei deve ser igual para todos, ricos e pobres."</p>
 
-            <p>Tucídides olhou ao redor. Milhares de cidadãos estavam reunidos, cada um com direito a falar e votar. Havia comerciantes, agricultores, artesãos, filósofos. Homens de diferentes origens e fortunas, todos iguais perante a lei. Era uma experiência sem precedentes na história da humanidade.</p>
+            <p id="p5">Tucídides olhou ao redor. Milhares de cidadãos estavam reunidos, cada um com direito a falar e votar. Havia comerciantes, agricultores, artesãos, filósofos. Homens de diferentes origens e fortunas, todos iguais perante a lei. Era uma experiência sem precedentes na história da humanidade.</p>
 
-            <p>Claro, a democracia tinha seus limites. As mulheres não podiam votar. Os estrangeiros residentes, mesmo nascidos em Atenas, eram excluídos. E os escravos, que realizavam o trabalho pesado, não tinham nenhum direito. Tucídides sabia que aquela era uma democracia imperfeita, mas ainda assim revolucionária.</p>
+            <p id="p6">Claro, a democracia tinha seus limites. As mulheres não podiam votar. Os estrangeiros residentes, mesmo nascidos em Atenas, eram excluídos. E os escravos, que realizavam o trabalho pesado, não tinham nenhum direito. Tucídides sabia que aquela era uma democracia imperfeita, mas ainda assim revolucionária.</p>
 
-            <p>Quando chegou sua vez de votar, Tucídides ergueu a mão a favor da expedição. A maioria concordou. Atenas enviaria seus navios. Naquele momento, Tucídides compreendeu o verdadeiro significado da democracia: não era apenas um sistema de governo, mas uma afirmação de que homens comuns podiam tomar decisões extraordinárias.</p>
+            <p id="p7">Quando chegou sua vez de votar, Tucídides ergueu a mão a favor da expedição. A maioria concordou. Atenas enviaria seus navios. Naquele momento, Tucídides compreendeu o verdadeiro significado da democracia: não era apenas um sistema de governo, mas uma afirmação de que homens comuns podiam tomar decisões extraordinárias.</p>
 
-            <p>Anos depois, lembrando aquele dia enquanto escrevia sua história da Guerra do Peloponeso, Tucídides refletiria sobre as fraquezas da democracia. Como o povo podia ser manipulado por oradores hábeis, como decisões impulsivas podiam levar ao desastre. Mas também lembraria que, pela primeira vez, os cidadãos tinham o poder de escolher seu próprio destino.</p>
+            <p id="p8">Anos depois, lembrando aquele dia enquanto escrevia sua história da Guerra do Peloponeso, Tucídides refletiria sobre as fraquezas da democracia. Como o povo podia ser manipulado por oradores hábeis, como decisões impulsivas podiam levar ao desastre. Mas também lembraria que, pela primeira vez, os cidadãos tinham o poder de escolher seu próprio destino.</p>
 
             <p class="author">— Atenas, século V a.C.</p>
         </div>
@@ -116,5 +147,47 @@
             <p>História para ENEM - Conto Histórico</p>
         </footer>
     </div>
+    <script>
+        const paragraphs = Array.from(document.querySelectorAll('.story p[id^="p"]'));
+        const texts = paragraphs.map(p => p.innerText);
+        let currentParagraph = 0, isPlaying = false, speechRate = 1, utterance = null;
+        function togglePlay() { if (isPlaying) stopSpeech(); else startSpeech(); }
+        function startSpeech() {
+            if (!('speechSynthesis' in window)) { alert('Seu navegador não suporta síntese de voz.'); return; }
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '⏸️';
+            document.getElementById('playBtn').classList.add('playing');
+            document.getElementById('statusText').innerText = 'Narrando...';
+            speakParagraph(currentParagraph);
+        }
+        function speakParagraph(index) {
+            if (index >= texts.length || !isPlaying) { stopSpeech(); currentParagraph = 0; return; }
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+            paragraphs[index].classList.add('highlight');
+            paragraphs[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            utterance = new SpeechSynthesisUtterance(texts[index]);
+            utterance.lang = 'pt-BR';
+            utterance.rate = speechRate;
+            document.getElementById('progressFill').style.width = ((index + 1) / texts.length) * 100 + '%';
+            utterance.onend = () => { currentParagraph++; if (isPlaying) speakParagraph(currentParagraph); };
+            utterance.onerror = () => stopSpeech();
+            speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() {
+            isPlaying = false;
+            speechSynthesis.cancel();
+            document.getElementById('playBtn').innerHTML = '▶️';
+            document.getElementById('playBtn').classList.remove('playing');
+            document.getElementById('statusText').innerText = 'Clique para ouvir a narração';
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+        }
+        function setSpeed(speed) {
+            speechRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (isPlaying) { speechSynthesis.cancel(); speakParagraph(currentParagraph); }
+        }
+        window.onbeforeunload = () => speechSynthesis.cancel();
+    </script>
 </body>
 </html>

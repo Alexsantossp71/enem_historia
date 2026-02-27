@@ -81,6 +81,19 @@
             margin-top: 2rem;
             color: #666;
         }
+        .audio-player { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .play-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; transition: all 0.3s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn.playing { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .speed-controls { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .speed-btn { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #e8e8e8; cursor: pointer; font-size: 0.85rem; }
+        .speed-btn:hover, .speed-btn.active { background: rgba(139, 92, 246, 0.3); }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); width: 0%; transition: width 0.1s; }
+        .status-text { text-align: center; color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+        .story p { transition: background 0.3s; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .story p.highlight { background: rgba(139, 92, 246, 0.2); }
     </style>
 </head>
 <body>
@@ -90,20 +103,38 @@
             <p class="subtitle">Um conto da Revolução Industrial</p>
         </header>
 
+        <!-- Player de Áudio -->
+        <div class="audio-player">
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">▶️</button>
+            </div>
+            <div class="speed-controls">
+                <span style="color: #888; font-size: 0.9rem;">Velocidade:</span>
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="status-text" id="statusText">Clique para ouvir a narração</p>
+        </div>
+
         <div class="story">
-            <p>Mary acordou antes do amanhecer, como fazia todos os dias há cinco anos. Com apenas doze anos, já trabalhava catorze horas por dia na fábrica têxtil de Manchester. O apito da fábrica marcava o ritmo de sua vida: acordar, trabalhar, dormir. Repetir.</p>
+            <p id="p1">Mary acordou antes do amanhecer, como fazia todos os dias há cinco anos. Com apenas doze anos, já trabalhava catorze horas por dia na fábrica têxtil de Manchester. O apito da fábrica marcava o ritmo de sua vida: acordar, trabalhar, dormir. Repetir.</p>
 
-            <p>Sua mãe também trabalhava na fábrica, assim como seus dois irmãos mais novos. Seu pai morrera três anos antes, esmagado por uma máquina que ninguém se preocupara em proteger. A viúva e as crianças foram mantidas no emprego, mas o salário diminuíra. A família vivia em um único cômodo em um cortiço, dividindo espaço com outras três famílias.</p>
+            <p id="p2">Sua mãe também trabalhava na fábrica, assim como seus dois irmãos mais novos. Seu pai morrera três anos antes, esmagado por uma máquina que ninguém se preocupara em proteger. A viúva e as crianças foram mantidas no emprego, mas o salário diminuíra. A família vivia em um único cômodo em um cortiço, dividindo espaço com outras três famílias.</p>
 
-            <p>Manchester era irreconhecível da cidade que Mary conhececera na infância. A vila tranquila transformara-se em uma metrópole escura, coberta por uma névoa permanente de fumaça de carvão. Chaminés gigantescas vomitavam fumaça dia e noite. O riacho onde Mary brincava era agora preto e sem vida.</p>
+            <p id="p3">Manchester era irreconhecível da cidade que Mary conhececera na infância. A vila tranquila transformara-se em uma metrópole escura, coberta por uma névoa permanente de fumaça de carvão. Chaminés gigantescas vomitavam fumaça dia e noite. O riacho onde Mary brincava era agora preto e sem vida.</p>
 
-            <p>Na fábrica, o barulho ensurdecedor das máquinas tornava impossível conversar. Mary alimentava os teares mecânicos, correndo entre eles, evitando os cintos que giravam acima de sua cabeça. Um descuido significava perder um dedo, uma mão, ou pior. Não havia regulamentos de segurança, nenhum seguro, nenhuma compensação para os feridos.</p>
+            <p id="p4">Na fábrica, o barulho ensurdecedor das máquinas tornava impossível conversar. Mary alimentava os teares mecânicos, correndo entre eles, evitando os cintos que giravam acima de sua cabeça. Um descuido significava perder um dedo, uma mão, ou pior. Não havia regulamentos de segurança, nenhum seguro, nenhuma compensação para os feridos.</p>
 
-            <p>Algumas noites, Mary ouvia os trabalhadores mais velhos falarem de um homem chamado Marx. Diziam que ele escrevia sobre a exploração dos trabalhadores, sobre como os donos das fábricas enriqueciam com o suor alheio. Falavam de sindicatos, de greves, de um mundo diferente onde os trabalhadores fossem donos do que produziam.</p>
+            <p id="p5">Algumas noites, Mary ouvia os trabalhadores mais velhos falarem de um homem chamado Marx. Diziam que ele escrevia sobre a exploração dos trabalhadores, sobre como os donos das fábricas enriqueciam com o suor alheio. Falavam de sindicatos, de greves, de um mundo diferente onde os trabalhadores fossem donos do que produziam.</p>
 
-            <p>"Um dia", pensava Mary enquanto seus dedos sangravam de tanto manipular fios, "tudo isso vai mudar." Ela não sabia quanto tempo levaria, quantas greves, quantas lutas, quanta dor. Mas via os trabalhadores se organizando, vendo greves serem reprimidas e renascendo, vendo a ideia de direitos trabalhistas crescer.</p>
+            <p id="p6">"Um dia", pensava Mary enquanto seus dedos sangravam de tanto manipular fios, "tudo isso vai mudar." Ela não sabia quanto tempo levaria, quantas greves, quantas lutas, quanta dor. Mas via os trabalhadores se organizando, vendo greves serem reprimidas e renascendo, vendo a ideia de direitos trabalhistas crescer.</p>
 
-            <p>A Revolução Industrial transformara o mundo. Produzia-se mais do que nunca, a riqueza crescera exponencialmente. Mas para Mary e milhões como ela, o custo era pago em corpos exaustos e vidas curtas. A história da industrialização era também a história da resistência dos trabalhadores.</p>
+            <p id="p7">A Revolução Industrial transformara o mundo. Produzia-se mais do que nunca, a riqueza crescera exponencialmente. Mas para Mary e milhões como ela, o custo era pago em corpos exaustos e vidas curtas. A história da industrialização era também a história da resistência dos trabalhadores.</p>
 
             <p class="author">— Manchester, Inglaterra, 1840</p>
         </div>
@@ -114,5 +145,47 @@
             <p>História para ENEM - Conto Histórico</p>
         </footer>
     </div>
+    <script>
+        const paragraphs = Array.from(document.querySelectorAll('.story p[id^="p"]'));
+        const texts = paragraphs.map(p => p.innerText);
+        let currentParagraph = 0, isPlaying = false, speechRate = 1, utterance = null;
+        function togglePlay() { if (isPlaying) stopSpeech(); else startSpeech(); }
+        function startSpeech() {
+            if (!('speechSynthesis' in window)) { alert('Seu navegador não suporta síntese de voz.'); return; }
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '⏸️';
+            document.getElementById('playBtn').classList.add('playing');
+            document.getElementById('statusText').innerText = 'Narrando...';
+            speakParagraph(currentParagraph);
+        }
+        function speakParagraph(index) {
+            if (index >= texts.length || !isPlaying) { stopSpeech(); currentParagraph = 0; return; }
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+            paragraphs[index].classList.add('highlight');
+            paragraphs[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            utterance = new SpeechSynthesisUtterance(texts[index]);
+            utterance.lang = 'pt-BR';
+            utterance.rate = speechRate;
+            document.getElementById('progressFill').style.width = ((index + 1) / texts.length) * 100 + '%';
+            utterance.onend = () => { currentParagraph++; if (isPlaying) speakParagraph(currentParagraph); };
+            utterance.onerror = () => stopSpeech();
+            speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() {
+            isPlaying = false;
+            speechSynthesis.cancel();
+            document.getElementById('playBtn').innerHTML = '▶️';
+            document.getElementById('playBtn').classList.remove('playing');
+            document.getElementById('statusText').innerText = 'Clique para ouvir a narração';
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+        }
+        function setSpeed(speed) {
+            speechRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (isPlaying) { speechSynthesis.cancel(); speakParagraph(currentParagraph); }
+        }
+        window.onbeforeunload = () => speechSynthesis.cancel();
+    </script>
 </body>
 </html>

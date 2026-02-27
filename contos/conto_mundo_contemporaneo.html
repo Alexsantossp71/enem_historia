@@ -81,6 +81,19 @@
             margin-top: 2rem;
             color: #666;
         }
+        .audio-player { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .play-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; transition: all 0.3s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn.playing { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .speed-controls { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .speed-btn { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #e8e8e8; cursor: pointer; font-size: 0.85rem; }
+        .speed-btn:hover, .speed-btn.active { background: rgba(139, 92, 246, 0.3); }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); width: 0%; transition: width 0.1s; }
+        .status-text { text-align: center; color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+        .story p { transition: background 0.3s; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .story p.highlight { background: rgba(139, 92, 246, 0.2); }
     </style>
 </head>
 <body>
@@ -90,20 +103,38 @@
             <p class="subtitle">Um conto do Mundo Contemporâneo</p>
         </header>
 
+        <!-- Player de Áudio -->
+        <div class="audio-player">
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">▶️</button>
+            </div>
+            <div class="speed-controls">
+                <span style="color: #888; font-size: 0.9rem;">Velocidade:</span>
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="status-text" id="statusText">Clique para ouvir a narração</p>
+        </div>
+
         <div class="story">
-            <p>Maya observava a tela de seu smartphone, impressionada com o que via. Com apenas alguns toques, podia conversar com amigos em Tóquio, assistir a vídeos gravados em Nairobi, comprar produtos fabricados em Xangai. O mundo, outrora vasto e fragmentado, agora cabia em sua palma.</p>
+            <p id="p1">Maya observava a tela de seu smartphone, impressionada com o que via. Com apenas alguns toques, podia conversar com amigos em Tóquio, assistir a vídeos gravados em Nairobi, comprar produtos fabricados em Xangai. O mundo, outrora vasto e fragmentado, agora cabia em sua palma.</p>
 
-            <p>Nascida em 2000, Maya era filha do novo milênio. Nunca conhecera um mundo sem internet, sem smartphones, sem redes sociais. Para ela, a globalização não era conceito abstrato, mas realidade cotidiana. As fronteiras que separavam nações pareciam cada vez mais irrelevantes.</p>
+            <p id="p2">Nascida em 2000, Maya era filha do novo milênio. Nunca conhecera um mundo sem internet, sem smartphones, sem redes sociais. Para ela, a globalização não era conceito abstrato, mas realidade cotidiana. As fronteiras que separavam nações pareciam cada vez mais irrelevantes.</p>
 
-            <p>Mas Maya também via as contradições daquele mundo conectado. Enquanto alguns lucravam bilhões com as novas tecnologias, outros perdiam empregos para automação. Enquanto informações fluíam livremente, fake news espalhavam-se como vírus. Enquanto movimentos sociais organizavam-se globalmente, extremismos cresciam em resposta.</p>
+            <p id="p3">Mas Maya também via as contradições daquele mundo conectado. Enquanto alguns lucravam bilhões com as novas tecnologias, outros perdiam empregos para automação. Enquanto informações fluíam livremente, fake news espalhavam-se como vírus. Enquanto movimentos sociais organizavam-se globalmente, extremismos cresciam em resposta.</p>
 
-            <p>"O mundo ficou menor, mas não ficou mais simples", refletia Maya. A pandemia de 2020 mostrara isso claramente: um vírus em Wuhan espalhara-se pelo planeta em semanas. Problemas globais exigiam soluções globais, mas as nações ainda pensavam localmente.</p>
+            <p id="p4">"O mundo ficou menor, mas não ficou mais simples", refletia Maya. A pandemia de 2020 mostrara isso claramente: um vírus em Wuhan espalhara-se pelo planeta em semanas. Problemas globais exigiam soluções globais, mas as nações ainda pensavam localmente.</p>
 
-            <p>As mudanças climáticas eram o desafio mais urgente. Maya vira incêndios na Austrália, inundações no Paquistão, secas na África. A geração dela sabia que herdados um planeta em crise, e que precisava agir. As marchas climáticas, os ativistas jovens, as pressões por sustentabilidade eram respostas àquela urgência.</p>
+            <p id="p5">As mudanças climáticas eram o desafio mais urgente. Maya vira incêndios na Austrália, inundações no Paquistão, secas na África. A geração dela sabia que herdados um planeta em crise, e que precisava agir. As marchas climáticas, os ativistas jovens, as pressões por sustentabilidade eram respostas àquela urgência.</p>
 
-            <p>"Somos a primeira geração que pode acabar com a pobreza extrema", diziam os otimistas. "E a última que pode salvar o planeta." A responsabilidade era enorme, mas também o era a determinação. Maya acreditava que a tecnologia, usada sabiamente, podia ser aliada na construção de um mundo melhor.</p>
+            <p id="p6">"Somos a primeira geração que pode acabar com a pobreza extrema", diziam os otimistas. "E a última que pode salvar o planeta." A responsabilidade era enorme, mas também o era a determinação. Maya acreditava que a tecnologia, usada sabiamente, podia ser aliada na construção de um mundo melhor.</p>
 
-            <p>O século XXI apenas começara, e já era o mais transformador da história humana. Maya não sabia que rumo tomaria, mas sabia que queria participar da construção. Em um mundo conectado, cada indivíduo podia fazer diferença. E ela estava pronta.</p>
+            <p id="p7">O século XXI apenas começara, e já era o mais transformador da história humana. Maya não sabia que rumo tomaria, mas sabia que queria participar da construção. Em um mundo conectado, cada indivíduo podia fazer diferença. E ela estava pronta.</p>
 
             <p class="author">— São Paulo, Brasil, 2020</p>
         </div>
@@ -114,5 +145,47 @@
             <p>História para ENEM - Conto Histórico</p>
         </footer>
     </div>
+    <script>
+        const paragraphs = Array.from(document.querySelectorAll('.story p[id^="p"]'));
+        const texts = paragraphs.map(p => p.innerText);
+        let currentParagraph = 0, isPlaying = false, speechRate = 1, utterance = null;
+        function togglePlay() { if (isPlaying) stopSpeech(); else startSpeech(); }
+        function startSpeech() {
+            if (!('speechSynthesis' in window)) { alert('Seu navegador não suporta síntese de voz.'); return; }
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '⏸️';
+            document.getElementById('playBtn').classList.add('playing');
+            document.getElementById('statusText').innerText = 'Narrando...';
+            speakParagraph(currentParagraph);
+        }
+        function speakParagraph(index) {
+            if (index >= texts.length || !isPlaying) { stopSpeech(); currentParagraph = 0; return; }
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+            paragraphs[index].classList.add('highlight');
+            paragraphs[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            utterance = new SpeechSynthesisUtterance(texts[index]);
+            utterance.lang = 'pt-BR';
+            utterance.rate = speechRate;
+            document.getElementById('progressFill').style.width = ((index + 1) / texts.length) * 100 + '%';
+            utterance.onend = () => { currentParagraph++; if (isPlaying) speakParagraph(currentParagraph); };
+            utterance.onerror = () => stopSpeech();
+            speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() {
+            isPlaying = false;
+            speechSynthesis.cancel();
+            document.getElementById('playBtn').innerHTML = '▶️';
+            document.getElementById('playBtn').classList.remove('playing');
+            document.getElementById('statusText').innerText = 'Clique para ouvir a narração';
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+        }
+        function setSpeed(speed) {
+            speechRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (isPlaying) { speechSynthesis.cancel(); speakParagraph(currentParagraph); }
+        }
+        window.onbeforeunload = () => speechSynthesis.cancel();
+    </script>
 </body>
 </html>

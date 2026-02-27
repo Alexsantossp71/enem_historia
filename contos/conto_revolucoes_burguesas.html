@@ -81,6 +81,19 @@
             margin-top: 2rem;
             color: #666;
         }
+        .audio-player { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .play-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; transition: all 0.3s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn.playing { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .speed-controls { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .speed-btn { padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #e8e8e8; cursor: pointer; font-size: 0.85rem; }
+        .speed-btn:hover, .speed-btn.active { background: rgba(139, 92, 246, 0.3); }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); width: 0%; transition: width 0.1s; }
+        .status-text { text-align: center; color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+        .story p { transition: background 0.3s; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .story p.highlight { background: rgba(139, 92, 246, 0.2); }
     </style>
 </head>
 <body>
@@ -90,22 +103,40 @@
             <p class="subtitle">Um conto das Revoluções Burguesas</p>
         </header>
 
+        <!-- Player de Áudio -->
+        <div class="audio-player">
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">▶️</button>
+            </div>
+            <div class="speed-controls">
+                <span style="color: #888; font-size: 0.9rem;">Velocidade:</span>
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="status-text" id="statusText">Clique para ouvir a narração</p>
+        </div>
+
         <div class="story">
-            <p>Pierre marchava entre a multidão que avançava em direção à Bastilha. Era um carpinteiro de trinta anos, um homem do povo que nunca imaginara participar de algo tão grandioso. Mas a fome, os impostos, a injustiça tinham empurrado Paris ao limite. Naquele 14 de julho de 1789, tudo mudaria.</p>
+            <p id="p1">Pierre marchava entre a multidão que avançava em direção à Bastilha. Era um carpinteiro de trinta anos, um homem do povo que nunca imaginara participar de algo tão grandioso. Mas a fome, os impostos, a injustiça tinham empurrado Paris ao limite. Naquele 14 de julho de 1789, tudo mudaria.</p>
 
-            <p>Os anos anteriores haviam sido difíceis para a França. Colheitas ruins geraram fome. Os nobres viviam em luxo enquanto camponeses morriam de fome. O rei Luís XVI, incapaz de resolver a crise financeira, convocara os Estados Gerais, uma assembleia que não se reunia há 175 anos. Quando o Terceiro Estado, representando o povo, foi marginalizado, os deputados proclamaram-se Assembleia Nacional, determinados a dar uma constituição à França.</p>
+            <p id="p2">Os anos anteriores haviam sido difíceis para a França. Colheitas ruins geraram fome. Os nobres viviam em luxo enquanto camponeses morriam de fome. O rei Luís XVI, incapaz de resolver a crise financeira, convocara os Estados Gerais, uma assembleia que não se reunia há 175 anos. Quando o Terceiro Estado, representando o povo, foi marginalizado, os deputados proclamaram-se Assembleia Nacional, determinados a dar uma constituição à França.</p>
 
-            <p>"A Bastilha!", gritou alguém na multidão. A antiga fortaleza era símbolo do absolutismo real. Ali, prisioneiros podiam ser jogados por ordem do rei, sem julgamento, sem esperança. Tomá-la significava desafiar o próprio poder real.</p>
+            <p id="p3">"A Bastilha!", gritou alguém na multidão. A antiga fortaleza era símbolo do absolutismo real. Ali, prisioneiros podiam ser jogados por ordem do rei, sem julgamento, sem esperança. Tomá-la significava desafiar o próprio poder real.</p>
 
-            <p>Pierre viu a multidão arrombar os portões. Os soldados da guarnição, poucos e vacilantes, não conseguiram resistir. A batalha foi breve e sangrenta. Quando terminou, a Bastilha estava nas mãos do povo. O governador foi morto, sua cabeça espetada em uma lança.</p>
+            <p id="p4">Pierre viu a multidão arrombar os portões. Os soldados da guarnição, poucos e vacilantes, não conseguiram resistir. A batalha foi breve e sangrenta. Quando terminou, a Bastilha estava nas mãos do povo. O governador foi morto, sua cabeça espetada em uma lança.</p>
 
-            <p>Nas semanas seguintes, Pierre viu a França transformar-se. A Assembleia Nacional aboliu os privilégios feudais, proclamou a Declaração dos Direitos do Homem e do Cidadão. "Os homens nascem e permanecem livres e iguais em direitos", declarava o primeiro artigo. Eram palavras que ecoariam pelo mundo.</p>
+            <p id="p5">Nas semanas seguintes, Pierre viu a França transformar-se. A Assembleia Nacional aboliu os privilégios feudais, proclamou a Declaração dos Direitos do Homem e do Cidadão. "Os homens nascem e permanecem livres e iguais em direitos", declarava o primeiro artigo. Eram palavras que ecoariam pelo mundo.</p>
 
-            <p>Mas a revolução que começara com esperança logo desembocaria em terror. Factions lutavam pelo poder. Girondinos, jacobinos, sans-culottes. A guilhotina ergueu-se na Praça da Revolução, e cabeças rolaram. O rei, a rainha, aristocratas, e depois os próprios revolucionários. Robespierre, que purgara tantos, ele mesmo purgado.</p>
+            <p id="p6">Mas a revolução que começara com esperança logo desembocaria em terror. Factions lutavam pelo poder. Girondinos, jacobinos, sans-culottes. A guilhotina ergueu-se na Praça da Revolução, e cabeças rolaram. O rei, a rainha, aristocratas, e depois os próprios revolucionários. Robespierre, que purgara tantos, ele mesmo purgado.</p>
 
-            <p>Pierre sobreviveu a tudo. Viu a revolução comer seus filhos, viu Napoleão emergir das cinzas, viu ideais de liberdade transformarem-se em império. Mas sabia que algo mudara para sempre. O povo descobrira seu poder. Reis e nobres nunca mais seriam os mesmos.</p>
+            <p id="p7">Pierre sobreviveu a tudo. Viu a revolução comer seus filhos, viu Napoleão emergir das cinzas, viu ideais de liberdade transformarem-se em império. Mas sabia que algo mudara para sempre. O povo descobrira seu poder. Reis e nobres nunca mais seriam os mesmos.</p>
 
-            <p>"Liberdade, Igualdade, Fraternidade", murmurou Pierre. As palavras permaneceram, mesmo quando a realidade as traiam. E aquelas palavras continuariam inspirando revoluções por séculos.</p>
+            <p id="p8">"Liberdade, Igualdade, Fraternidade", murmurou Pierre. As palavras permaneceram, mesmo quando a realidade as traiam. E aquelas palavras continuariam inspirando revoluções por séculos.</p>
 
             <p class="author">— Paris, França, 1789</p>
         </div>
@@ -116,5 +147,47 @@
             <p>História para ENEM - Conto Histórico</p>
         </footer>
     </div>
+    <script>
+        const paragraphs = Array.from(document.querySelectorAll('.story p[id^="p"]'));
+        const texts = paragraphs.map(p => p.innerText);
+        let currentParagraph = 0, isPlaying = false, speechRate = 1, utterance = null;
+        function togglePlay() { if (isPlaying) stopSpeech(); else startSpeech(); }
+        function startSpeech() {
+            if (!('speechSynthesis' in window)) { alert('Seu navegador não suporta síntese de voz.'); return; }
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '⏸️';
+            document.getElementById('playBtn').classList.add('playing');
+            document.getElementById('statusText').innerText = 'Narrando...';
+            speakParagraph(currentParagraph);
+        }
+        function speakParagraph(index) {
+            if (index >= texts.length || !isPlaying) { stopSpeech(); currentParagraph = 0; return; }
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+            paragraphs[index].classList.add('highlight');
+            paragraphs[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            utterance = new SpeechSynthesisUtterance(texts[index]);
+            utterance.lang = 'pt-BR';
+            utterance.rate = speechRate;
+            document.getElementById('progressFill').style.width = ((index + 1) / texts.length) * 100 + '%';
+            utterance.onend = () => { currentParagraph++; if (isPlaying) speakParagraph(currentParagraph); };
+            utterance.onerror = () => stopSpeech();
+            speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() {
+            isPlaying = false;
+            speechSynthesis.cancel();
+            document.getElementById('playBtn').innerHTML = '▶️';
+            document.getElementById('playBtn').classList.remove('playing');
+            document.getElementById('statusText').innerText = 'Clique para ouvir a narração';
+            paragraphs.forEach(p => p.classList.remove('highlight'));
+        }
+        function setSpeed(speed) {
+            speechRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (isPlaying) { speechSynthesis.cancel(); speakParagraph(currentParagraph); }
+        }
+        window.onbeforeunload = () => speechSynthesis.cancel();
+    </script>
 </body>
 </html>
