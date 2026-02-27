@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <div style={{ minHeight: '100vh' }}>
@@ -20,7 +22,7 @@ export default function Home() {
           flexWrap: 'wrap',
           gap: '1rem'
         }}>
-          <a href="/" style={{
+          <Link href="/" style={{
             fontSize: '1.5rem',
             fontWeight: 700,
             color: 'white',
@@ -30,7 +32,7 @@ export default function Home() {
             gap: '0.5rem'
           }}>
             📚 História ENEM
-          </a>
+          </Link>
           <nav style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
             <a href="#modulos" style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none', fontWeight: 500 }}>Módulos</a>
             <a href="#sobre" style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none', fontWeight: 500 }}>Sobre</a>
@@ -195,7 +197,7 @@ export default function Home() {
 
 function LessonItem({ number, title, href }: { number: string; title: string; href: string }) {
   return (
-    <a href={href} style={{
+    <Link href={href} style={{
       display: 'flex',
       alignItems: 'center',
       padding: '1rem 1.5rem',
@@ -224,6 +226,6 @@ function LessonItem({ number, title, href }: { number: string; title: string; hr
       </span>
       <span style={{ flex: 1, fontWeight: 500 }}>{title}</span>
       <span style={{ color: '#64748b' }}>→</span>
-    </a>
+    </Link>
   );
 }

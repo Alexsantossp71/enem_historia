@@ -1,5 +1,6 @@
 import { getLessonBySlug, getAllLessons } from '@/data/lessons';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -68,7 +69,7 @@ export default async function LessonPage({ params }: PageProps) {
           flexWrap: 'wrap',
           gap: '1rem'
         }}>
-          <a href="/" style={{
+          <Link href="/" style={{
             fontSize: '1.5rem',
             fontWeight: 700,
             color: 'white',
@@ -78,9 +79,9 @@ export default async function LessonPage({ params }: PageProps) {
             gap: '0.5rem'
           }}>
             📚 História ENEM
-          </a>
+          </Link>
           <nav style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none', fontWeight: 500 }}>← Voltar ao Início</a>
+            <Link href="/" style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none', fontWeight: 500 }}>← Voltar ao Início</Link>
           </nav>
         </div>
       </header>
@@ -97,7 +98,7 @@ export default async function LessonPage({ params }: PageProps) {
           gap: '0.5rem',
           fontSize: '0.875rem'
         }}>
-          <a href="/" style={{ color: '#64748b', textDecoration: 'none' }}>Início</a>
+          <Link href="/" style={{ color: '#64748b', textDecoration: 'none' }}>Início</Link>
           <span style={{ color: '#64748b' }}>›</span>
           <span style={{ color: '#1e293b', fontWeight: 500 }}>{lesson.title}</span>
         </div>
@@ -181,7 +182,7 @@ export default async function LessonPage({ params }: PageProps) {
           gap: '1rem',
           flexWrap: 'wrap'
         }}>
-          <a 
+          <Link 
             href="/"
             style={{
               display: 'inline-flex',
@@ -196,7 +197,7 @@ export default async function LessonPage({ params }: PageProps) {
             }}
           >
             ← Ver todas as aulas
-          </a>
+          </Link>
         </div>
       </main>
 
