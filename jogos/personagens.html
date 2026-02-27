@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Personagens - História ENEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: #888; }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            transition: width 0.3s ease;
+        }
+        .score-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .score-item .label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .score-item .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .character-card {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(124, 58, 237, 0.2));
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .character-card::before {
+            content: '?';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 150px;
+            opacity: 0.05;
+            font-weight: bold;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(236, 72, 153, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: #ec4899;
+        }
+        .clue-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        .clue-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 3px solid #4f46e5;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .clue-item.revealed {
+            border-left-color: #22c55e;
+        }
+        .clue-item.hidden {
+            opacity: 0.3;
+            filter: blur(5px);
+            user-select: none;
+        }
+        .clue-counter {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .answer-section {
+            margin-top: 1.5rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .option-btn:hover {
+            background: rgba(79, 70, 229, 0.2);
+            border-color: #4f46e5;
+        }
+        .option-btn.correct {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+        }
+        .option-btn.wrong {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+        }
+        .option-btn.selected {
+            border-color: #4f46e5;
+            box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+        }
+        .reveal-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            color: #f39c12;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .reveal-btn:hover {
+            background: rgba(245, 158, 11, 0.3);
+        }
+        .reveal-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .feedback {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+        }
+        .feedback.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        .result-area {
+            text-align: center;
+            padding: 2rem;
+        }
+        .final-score {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: #fff; }
+        .points-hint {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
+            .clue-item { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/historia_enem/" class="back-link">← Voltar ao início</a>
+            <h1>👤 Desafio de Personagens</h1>
+            <p class="subtitle">Identifique o personagem histórico pelas pistas!</p>
+        </header>
+
+        <div class="game-card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            
+            <div class="score-bar">
+                <div class="score-item">
+                    <div class="label">Personagem</div>
+                    <div class="value" id="question-num">1/15</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Acertos</div>
+                    <div class="value" id="correct" style="color: #22c55e;">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Pistas Usadas</div>
+                    <div class="value" id="clues-used" style="color: #f39c12;">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Pontos</div>
+                    <div class="value" id="score" style="color: #ec4899;">0</div>
+                </div>
+            </div>
+            
+            <div id="game-content">
+                <div class="character-card">
+                    <span class="category-tag" id="category"></span>
+                    <div class="clue-counter">
+                        Pistas reveladas: <span id="clue-count">0</span>/5
+                    </div>
+                    <ul class="clue-list" id="clue-list"></ul>
+                    
+                    <button class="reveal-btn" id="reveal-btn" onclick="revealNextClue()">
+                        🔍 Revelar próxima pista (-10 pontos)
+                    </button>
+                    
+                    <div class="answer-section">
+                        <p style="text-align: center; margin-bottom: 1rem;">Quem é este personagem?</p>
+                        <div class="options-grid" id="options"></div>
+                    </div>
+                    
+                    <p class="points-hint" id="points-hint">Pontos disponíveis: 50</p>
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
+                <button class="btn" id="next-btn" style="display: none;" onclick="nextCharacter()">Próximo Personagem →</button>
+            </div>
+            
+            <div class="result-area" id="result-area" style="display: none;">
+                <p>Desafio concluído!</p>
+                <p class="final-score" id="final-score"></p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <p class="stat-value" id="correct-count" style="color: #22c55e;"></p>
+                        <p class="stat-label">Acertos</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="avg-clues" style="color: #f39c12;"></p>
+                        <p class="stat-label">Média de Pistas</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="percentage" style="color: #ec4899;"></p>
+                        <p class="stat-label">Aproveitamento</p>
+                    </div>
+                </div>
+                <p id="result-message"></p>
+                <button class="btn" onclick="startGame()">Jogar Novamente</button>
+                <a href="/historia_enem/" class="btn">Voltar ao Início</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const characters = [
+            {
+                category: "Grécia Antiga",
+                name: "Péricles",
+                clues: [
+                    "Fui um estadista ateniense do século V a.C.",
+                    "Governou Atenas durante sua Era de Ouro",
+                    "Promovi a construção do Partenon",
+                    "Fortaleci a democracia ateniense",
+                    "Meu nome está ligado ao maior século de Atenas"
+                ],
+                options: ["Sócrates", "Péricles", "Platão", "Alexandre Magno"]
+            },
+            {
+                category: "Roma Antiga",
+                name: "Júlio César",
+                clues: [
+                    "Fui um general e estadista romano",
+                    "Conquistei a Gália",
+                    "Travessei o Rio Rubicão",
+                    "Fui assassinado nos Idos de Março",
+                    "Adotei Otaviano como meu herdeiro"
+                ],
+                options: ["Augusto", "Júlio César", "Nero", "Marco Antônio"]
+            },
+            {
+                category: "Renascimento",
+                name: "Leonardo da Vinci",
+                clues: [
+                    "Fui um gênio polímata do Renascimento italiano",
+                    "Pintei a Mona Lisa e A Última Ceia",
+                    "Projetei máquinas voadoras séculos antes do voo",
+                    "Estudei anatomia através de dissecções",
+                    "Sou considerado o homem mais talentoso do Renascimento"
+                ],
+                options: ["Michelangelo", "Leonardo da Vinci", "Rafael", "Galileu Galilei"]
+            },
+            {
+                category: "Reforma Protestante",
+                name: "Martinho Lutero",
+                clues: [
+                    "Fui um monge alemão do século XVI",
+                    "Publiquei as 95 Teses em 1517",
+                    "Critiquei a venda de indulgências pela Igreja",
+                    "Traduzi a Bíblia para o alemão",
+                    "Sou considerado o pai do protestantismo"
+                ],
+                options: ["João Calvino", "Martinho Lutero", "Henrique VIII", "Erasmus"]
+            },
+            {
+                category: "Revolução Francesa",
+                name: "Napoleão Bonaparte",
+                clues: [
+                    "Nasci na Córsega em 1769",
+                    "Tornei-me general aos 24 anos",
+                    "Coroei-me imperador dos franceses",
+                    "Criei o Código Civil que leva meu nome",
+                    "Fui derrotado em Waterloo em 1815"
+                ],
+                options: ["Luís XVI", "Robespierre", "Napoleão Bonaparte", "Talleyrand"]
+            },
+            {
+                category: "Independência da América",
+                name: "Simón Bolívar",
+                clues: [
+                    "Sou conhecido como 'O Libertador'",
+                    "Nasci na Venezuela em 1783",
+                    "Liderei a independência de vários países sul-americanos",
+                    "Sonhei com a unidade da América Latina",
+                    "A Bolívia foi nomeada em minha homenagem"
+                ],
+                options: ["José de San Martín", "Simón Bolívar", "Miguel Hidalgo", "Dom Pedro I"]
+            },
+            {
+                category: "Brasil Império",
+                name: "D. Pedro I",
+                clues: [
+                    "Sou filho do rei D. João VI de Portugal",
+                    "Proclamei a independência do Brasil em 1822",
+                    "Fui o primeiro imperador do Brasil",
+                    "Dei o Grito do Ipiranga",
+                    "Abdiquei do trono em 1831"
+                ],
+                options: ["D. Pedro I", "D. Pedro II", "D. João VI", "Tiradentes"]
+            },
+            {
+                category: "Era Vargas",
+                name: "Getúlio Vargas",
+                clues: [
+                    "Fui presidente do Brasil por 18 anos",
+                    "Criei a CLT em 1943",
+                    "Governei durante o Estado Novo",
+                    "Promovi a industrialização brasileira",
+                    "Suicidei-me em 1954"
+                ],
+                options: ["Juscelino Kubitschek", "Getúlio Vargas", "Lula", "Jango Goulart"]
+            },
+            {
+                category: "Segunda Guerra",
+                name: "Adolf Hitler",
+                clues: [
+                    "Nasci na Áustria em 1889",
+                    "Lideri o Partido Nazista na Alemanha",
+                    "Escrevi Mein Kampf",
+                    "Iniciei a Segunda Guerra Mundial",
+                    "Suicidei-me em um bunker em Berlim"
+                ],
+                options: ["Mussolini", "Stalin", "Adolf Hitler", "Churchill"]
+            },
+            {
+                category: "Revolução Russa",
+                name: "Lenin",
+                clues: [
+                    "Fui o líder da Revolução Russa de 1917",
+                    "Fundei o partido bolchevique",
+                    "Criei a NEP (Nova Política Econômica)",
+                    "Meu corpo está mumificado em Moscou",
+                    "Meu verdadeiro nome era Vladimir Ilitch Ulianov"
+                ],
+                options: ["Lenin", "Stalin", "Trotsky", "Gorbachev"]
+            },
+            {
+                category: "Iluminismo",
+                name: "Montesquieu",
+                clues: [
+                    "Fui um filósofo francês do século XVIII",
+                    "Escrevi 'O Espírito das Leis'",
+                    "Defendi a separação dos três poderes",
+                    "Minha obra influenciou constituições modernas",
+                    "Critiquei o absolutismo e propus o equilíbrio de poderes"
+                ],
+                options: ["Voltaire", "Rousseau", "Montesquieu", "Diderot"]
+            },
+            {
+                category: "Absolutismo",
+                name: "Luís XIV",
+                clues: [
+                    "Fui rei da França por 72 anos",
+                    "Sou conhecido como 'Rei Sol'",
+                    "Construí o Palácio de Versalhes",
+                    "Disse: 'O Estado sou eu'",
+                    "Revolucionei a arte e cultura francesa"
+                ],
+                options: ["Luís XVI", "Luís XIV", "Henrique IV", "Napoleão"]
+            },
+            {
+                category: "Antiguidade Egípcia",
+                name: "Cleópatra",
+                clues: [
+                    "Fui a última faraó do Egito Antigo",
+                    "Fui famosa por minha inteligência e beleza",
+                    "Tive relacionamentos com César e Marco Antônio",
+                    "Depois de minha morte, o Egito tornou-se província romana",
+                    "Morri em 30 a.C., supostamente por picada de cobra"
+                ],
+                options: ["Nefertiti", "Cleópatra", "Hatshepsut", "Isis"]
+            },
+            {
+                category: "Primeira Guerra",
+                name: "Gavrilo Princip",
+                clues: [
+                    "Sou nacionalista sérvio",
+                    "Em 1914, mudei a história do mundo",
+                    "Assassinei o arquiduque Francisco Ferdinando",
+                    "Meu ato foi o estopim da Primeira Guerra Mundial",
+                    "Agi em Sarajevo, na Bósnia"
+                ],
+                options: ["Gavrilo Princip", "Francisco Ferdinando", "Kaiser Wilhelm", "Archiduke Franz"]
+            },
+            {
+                category: "Ditadura Militar Brasil",
+                name: "Dilma Rousseff",
+                clues: [
+                    "Fui guerrilheira durante a ditadura militar brasileira",
+                    "Fui torturada pela repressão",
+                    "Tornei-me a primeira mulher presidente do Brasil",
+                    "Governei de 2011 a 2016",
+                    "Fui afastada da presidência por impeachment"
+                ],
+                options: ["Dilma Rousseff", "Marighella", "Lula", "Fernando Henrique Cardoso"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let correct = 0;
+        let cluesUsedTotal = 0;
+        let currentCluesRevealed = 0;
+        let currentPoints = 50;
+        let answered = false;
+        let gameCharacters = [];
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startGame() {
+            currentQuestion = 0;
+            score = 0;
+            correct = 0;
+            cluesUsedTotal = 0;
+            gameCharacters = shuffleArray(characters).slice(0, 15);
+            document.getElementById('game-content').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+            loadCharacter();
+        }
+
+        function loadCharacter() {
+            answered = false;
+            currentCluesRevealed = 0;
+            currentPoints = 50;
+            
+            const char = gameCharacters[currentQuestion];
+            
+            document.getElementById('progress').style.width = (currentQuestion / gameCharacters.length * 100) + '%';
+            document.getElementById('question-num').textContent = `${currentQuestion + 1}/${gameCharacters.length}`;
+            document.getElementById('category').textContent = char.category;
+            document.getElementById('clue-count').textContent = '0';
+            document.getElementById('points-hint').textContent = `Pontos disponíveis: ${currentPoints}`;
+            
+            // Render clues (all hidden initially)
+            const clueList = document.getElementById('clue-list');
+            clueList.innerHTML = '';
+            char.clues.forEach((clue, idx) => {
+                const li = document.createElement('li');
+                li.className = 'clue-item hidden';
+                li.textContent = clue;
+                li.id = `clue-${idx}`;
+                clueList.appendChild(li);
+            });
+            
+            // Reveal first clue
+            revealNextClue();
+            
+            // Render options
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            shuffleArray(char.options).forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(option, char.name, btn);
+                optionsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('reveal-btn').disabled = false;
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            document.getElementById('correct').textContent = correct;
+            document.getElementById('clues-used').textContent = cluesUsedTotal;
+            document.getElementById('score').textContent = score;
+        }
+
+        function revealNextClue() {
+            const char = gameCharacters[currentQuestion];
+            if (currentCluesRevealed < char.clues.length) {
+                const clueElement = document.getElementById(`clue-${currentCluesRevealed}`);
+                clueElement.classList.remove('hidden');
+                clueElement.classList.add('revealed');
+                currentCluesRevealed++;
+                
+                if (currentCluesRevealed > 1) {
+                    currentPoints = Math.max(10, currentPoints - 10);
+                    cluesUsedTotal++;
+                }
+                
+                document.getElementById('clue-count').textContent = currentCluesRevealed;
+                document.getElementById('points-hint').textContent = `Pontos disponíveis: ${currentPoints}`;
+                document.getElementById('clues-used').textContent = cluesUsedTotal;
+                
+                if (currentCluesRevealed >= char.clues.length) {
+                    document.getElementById('reveal-btn').disabled = true;
+                }
+            }
+        }
+
+        function selectAnswer(selected, correctName, btnElement) {
+            if (answered) return;
+            answered = true;
+            
+            const isCorrect = selected === correctName;
+            const feedback = document.getElementById('feedback');
+            
+            // Show all clues
+            const char = gameCharacters[currentQuestion];
+            char.clues.forEach((_, idx) => {
+                const clueEl = document.getElementById(`clue-${idx}`);
+                clueEl.classList.remove('hidden');
+            });
+            
+            // Highlight buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                if (btn.textContent === correctName) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === selected && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+            
+            if (isCorrect) {
+                correct++;
+                score += currentPoints;
+                feedback.className = 'feedback show correct';
+                feedback.textContent = `✓ Correto! Era ${correctName}. +${currentPoints} pontos!`;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.textContent = `✗ Incorreto! Era ${correctName}.`;
+            }
+            
+            document.getElementById('reveal-btn').disabled = true;
+            document.getElementById('next-btn').style.display = 'inline-block';
+            
+            document.getElementById('correct').textContent = correct;
+            document.getElementById('score').textContent = score;
+        }
+
+        function nextCharacter() {
+            currentQuestion++;
+            if (currentQuestion < gameCharacters.length) {
+                loadCharacter();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('game-content').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            
+            const percentage = Math.round((correct / gameCharacters.length) * 100);
+            const avgClues = (cluesUsedTotal / gameCharacters.length).toFixed(1);
+            
+            document.getElementById('final-score').textContent = score + ' pontos';
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('avg-clues').textContent = avgClues;
+            document.getElementById('percentage').textContent = percentage + '%';
+            
+            let message = '';
+            if (percentage >= 90) message = '🌟 Excelente! Você conhece muito bem os personagens históricos!';
+            else if (percentage >= 70) message = '👏 Muito bom! Seu conhecimento histórico é sólido!';
+            else if (percentage >= 50) message = '📚 Bom trabalho! Continue estudando!';
+            else message = '💪 Continue praticando! O conhecimento histórico se constrói aos poucos.';
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

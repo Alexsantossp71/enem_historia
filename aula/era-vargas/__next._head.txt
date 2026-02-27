@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[97367,["/historia_enem/_next/static/chunks/ff1a16fafef87110.js","/historia_enem/_next/static/chunks/d2be314c3ece3fbe.js"],"ViewportBoundary"]
+3:I[97367,["/historia_enem/_next/static/chunks/ff1a16fafef87110.js","/historia_enem/_next/static/chunks/d2be314c3ece3fbe.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[27201,["/historia_enem/_next/static/chunks/ff1a16fafef87110.js","/historia_enem/_next/static/chunks/d2be314c3ece3fbe.js"],"IconMark"]
+0:{"buildId":"Chwktfq3E9sBhitgIH8lv","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Era Vargas - História ENEM"}],["$","meta","1",{"name":"description","content":"Aula de Era Vargas do curso de História para ENEM"}],["$","meta","2",{"name":"author","content":"Curso História ENEM"}],["$","meta","3",{"name":"keywords","content":"ENEM,História,Brasil,curso,vestibular,educação"}],["$","link","4",{"rel":"icon","href":"/favicon.ico"}],["$","$L5","5",{}]]}]}]}],null]}],"loading":null,"isPartial":false}

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linha do Tempo - História ENEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: #888; }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .instructions {
+            background: rgba(79, 70, 229, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .round-info {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .round-info span {
+            color: #f39c12;
+        }
+        .timeline-container {
+            position: relative;
+            padding: 1rem 0;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #4f46e5, #7c3aed, #ec4899);
+            border-radius: 2px;
+        }
+        .events-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 300px;
+        }
+        .event-card {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: grab;
+            transition: all 0.3s ease;
+            position: relative;
+            user-select: none;
+        }
+        .event-card:hover {
+            background: rgba(79, 70, 229, 0.2);
+            border-color: #4f46e5;
+        }
+        .event-card.dragging {
+            opacity: 0.5;
+            transform: scale(1.02);
+        }
+        .event-card.over {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.2);
+        }
+        .event-card.correct {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+        }
+        .event-card.wrong {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+        }
+        .event-card .number {
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .event-card .year-hint {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.25rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+        }
+        .score-display {
+            text-align: center;
+            padding: 2rem;
+        }
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .feedback {
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            text-align: center;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+        }
+        .feedback.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: #fff; }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            .event-card .number { left: -10px; width: 25px; height: 25px; font-size: 0.8rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/historia_enem/" class="back-link">← Voltar ao início</a>
+            <h1>⏳ Linha do Tempo</h1>
+            <p class="subtitle">Ordene os eventos cronologicamente!</p>
+        </header>
+
+        <div class="game-card" id="game-container">
+            <div class="instructions">
+                📋 Arraste os eventos para colocá-los na ordem cronológica correta (do mais antigo para o mais recente)
+            </div>
+            
+            <div class="round-info">
+                Rodada <span id="round">1</span> de <span>5</span>
+            </div>
+            
+            <div class="events-container" id="events-container"></div>
+            
+            <div class="feedback" id="feedback"></div>
+            
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn" id="check-btn" onclick="checkOrder()">Verificar Ordem</button>
+                <button class="btn btn-secondary" id="next-btn" style="display: none;" onclick="nextRound()">Próxima Rodada →</button>
+            </div>
+            
+            <div id="result-area" style="display: none;">
+                <div class="score-display">
+                    <p>Sua pontuação:</p>
+                    <p class="score-value" id="final-score"></p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <p class="stat-value" id="correct-count" style="color: #22c55e;"></p>
+                        <p class="stat-label">Rodadas Perfeitas</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="total-score" style="color: #f39c12;"></p>
+                        <p class="stat-label">Pontos Totais</p>
+                    </div>
+                </div>
+                <button class="btn" onclick="startGame()">Jogar Novamente</button>
+                <a href="/historia_enem/" class="btn btn-secondary">Voltar ao Início</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const eventGroups = [
+            [
+                { event: "Invenção da escrita", year: "3500 a.C.", order: 1 },
+                { event: "Fundação de Roma", year: "753 a.C.", order: 2 },
+                { event: "Queda do Império Romano do Ocidente", year: "476 d.C.", order: 3 },
+                { event: "Descobrimento da América", year: "1492", order: 4 },
+                { event: "Revolução Francesa", year: "1789", order: 5 }
+            ],
+            [
+                { event: "Independência do Brasil", year: "1822", order: 1 },
+                { event: "Abolição da Escravatura no Brasil", year: "1888", order: 2 },
+                { event: "Proclamação da República no Brasil", year: "1889", order: 3 },
+                { event: "Revolução de 1930", year: "1930", order: 4 },
+                { event: "Golpe Militar de 1964", year: "1964", order: 5 }
+            ],
+            [
+                { event: "Primeira Guerra Mundial", year: "1914-1918", order: 1 },
+                { event: "Revolução Russa", year: "1917", order: 2 },
+                { event: "Crise de 1929", year: "1929", order: 3 },
+                { event: "Segunda Guerra Mundial", year: "1939-1945", order: 4 },
+                { event: "Queda do Muro de Berlim", year: "1989", order: 5 }
+            ],
+            [
+                { event: "Revolução Neolítica", year: "10000 a.C.", order: 1 },
+                { event: "Construção das Pirâmides de Gizé", year: "2500 a.C.", order: 2 },
+                { event: "Democracia em Atenas", year: "508 a.C.", order: 3 },
+                { event: "Imperador Carlos Magno", year: "800 d.C.", order: 4 },
+                { event: "Tomada de Constantinopla", year: "1453", order: 5 }
+            ],
+            [
+                { event: "Invenção da Imprensa (Gutenberg)", year: "1440", order: 1 },
+                { event: "Reforma Protestante (Lutero)", year: "1517", order: 2 },
+                { event: "Iluminismo", year: "Século XVIII", order: 3 },
+                { event: "Revolução Industrial", year: "Século XVIII-XIX", order: 4 },
+                { event: "Unificação da Alemanha", year: "1871", order: 5 }
+            ]
+        ];
+
+        let currentRound = 0;
+        let totalScore = 0;
+        let perfectRounds = 0;
+        let currentEvents = [];
+        let draggedItem = null;
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startGame() {
+            currentRound = 0;
+            totalScore = 0;
+            perfectRounds = 0;
+            document.getElementById('game-container').querySelector('.instructions').style.display = 'block';
+            document.getElementById('game-container').querySelector('.round-info').style.display = 'block';
+            document.getElementById('events-container').style.display = 'flex';
+            document.getElementById('check-btn').style.display = 'inline-block';
+            document.getElementById('result-area').style.display = 'none';
+            loadRound();
+        }
+
+        function loadRound() {
+            document.getElementById('round').textContent = currentRound + 1;
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('check-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            currentEvents = shuffleArray([...eventGroups[currentRound]]);
+            renderEvents();
+        }
+
+        function renderEvents() {
+            const container = document.getElementById('events-container');
+            container.innerHTML = '';
+            
+            currentEvents.forEach((event, index) => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.draggable = true;
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <span class="number">${index + 1}</span>
+                    <div class="event-text">${event.event}</div>
+                    <div class="year-hint" style="display: none;">${event.year}</div>
+                `;
+                
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragend', handleDragEnd);
+                card.addEventListener('dragover', handleDragOver);
+                card.addEventListener('drop', handleDrop);
+                card.addEventListener('dragenter', handleDragEnter);
+                card.addEventListener('dragleave', handleDragLeave);
+                
+                // Touch events for mobile
+                card.addEventListener('touchstart', handleTouchStart, { passive: true });
+                card.addEventListener('touchmove', handleTouchMove, { passive: false });
+                card.addEventListener('touchend', handleTouchEnd);
+                
+                container.appendChild(card);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.event-card').forEach(card => {
+                card.classList.remove('over');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (draggedItem !== this) {
+                const container = document.getElementById('events-container');
+                const allCards = [...container.querySelectorAll('.event-card')];
+                const draggedIdx = allCards.indexOf(draggedItem);
+                const targetIdx = allCards.indexOf(this);
+                
+                if (draggedIdx < targetIdx) {
+                    this.parentNode.insertBefore(draggedItem, this.nextSibling);
+                } else {
+                    this.parentNode.insertBefore(draggedItem, this);
+                }
+                
+                updateNumbers();
+            }
+            this.classList.remove('over');
+        }
+
+        // Touch handling for mobile
+        let touchStartY = 0;
+        let touchedCard = null;
+
+        function handleTouchStart(e) {
+            touchedCard = this;
+            touchStartY = e.touches[0].clientY;
+            this.classList.add('dragging');
+        }
+
+        function handleTouchMove(e) {
+            if (!touchedCard) return;
+            e.preventDefault();
+            
+            const touch = e.touches[0];
+            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            if (elementBelow && elementBelow.classList.contains('event-card') && elementBelow !== touchedCard) {
+                const container = document.getElementById('events-container');
+                const allCards = [...container.querySelectorAll('.event-card')];
+                const touchedIdx = allCards.indexOf(touchedCard);
+                const targetIdx = allCards.indexOf(elementBelow);
+                
+                if (touchedIdx < targetIdx) {
+                    container.insertBefore(touchedCard, elementBelow.nextSibling);
+                } else {
+                    container.insertBefore(touchedCard, elementBelow);
+                }
+                updateNumbers();
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (touchedCard) {
+                touchedCard.classList.remove('dragging');
+                touchedCard = null;
+            }
+        }
+
+        function updateNumbers() {
+            document.querySelectorAll('.event-card .number').forEach((num, idx) => {
+                num.textContent = idx + 1;
+            });
+        }
+
+        function checkOrder() {
+            const container = document.getElementById('events-container');
+            const cards = [...container.querySelectorAll('.event-card')];
+            let correct = 0;
+            
+            cards.forEach((card, idx) => {
+                const eventIndex = parseInt(card.dataset.index);
+                const event = currentEvents[eventIndex];
+                
+                if (event.order === idx + 1) {
+                    card.classList.add('correct');
+                    correct++;
+                } else {
+                    card.classList.add('wrong');
+                }
+                
+                card.querySelector('.year-hint').style.display = 'block';
+            });
+            
+            const roundScore = correct * 20;
+            totalScore += roundScore;
+            if (correct === 5) perfectRounds++;
+            
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + (correct === 5 ? 'success' : 'error');
+            feedback.textContent = correct === 5 
+                ? `🎉 Perfeito! +${roundScore} pontos!`
+                : `Você acertou ${correct}/5. +${roundScore} pontos.`;
+            
+            document.getElementById('check-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-block';
+            
+            if (currentRound >= eventGroups.length - 1) {
+                document.getElementById('next-btn').textContent = 'Ver Resultado';
+            }
+        }
+
+        function nextRound() {
+            currentRound++;
+            if (currentRound < eventGroups.length) {
+                document.getElementById('next-btn').textContent = 'Próxima Rodada →';
+                loadRound();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('game-container').querySelector('.instructions').style.display = 'none';
+            document.getElementById('game-container').querySelector('.round-info').style.display = 'none';
+            document.getElementById('events-container').style.display = 'none';
+            document.getElementById('check-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = totalScore;
+            document.getElementById('correct-count').textContent = perfectRounds;
+            document.getElementById('total-score').textContent = totalScore;
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

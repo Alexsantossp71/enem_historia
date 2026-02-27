@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos de História - ENEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 1.2rem;
+        }
+        .intro {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(79, 70, 229, 0.2);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: #4f46e5;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.3);
+        }
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+        }
+        .game-description {
+            color: #888;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .game-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .game-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: #fff; }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.5rem;
+            text-align: center;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .games-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/historia_enem/" class="back-link">← Voltar ao curso</a>
+            <h1>🎮 Jogos de História</h1>
+            <p class="subtitle">Aprenda brincando! Fixe o conteúdo de forma divertida.</p>
+        </header>
+
+        <div class="intro">
+            📚 Pratique seus conhecimentos de História para o ENEM com nossos jogos educacionais interativos! 
+            Cada jogo foca em diferentes habilidades e conteúdos. Escolha e comece a jogar!
+        </div>
+
+        <div class="games-grid">
+            <a href="quiz.html" class="game-card">
+                <div class="game-icon">🎯</div>
+                <h3 class="game-title">Quiz de Múltipla Escolha</h3>
+                <p class="game-description">
+                    Teste seus conhecimentos com perguntas sobre todos os períodos históricos. 
+                    20 questões com feedback instantâneo e explicações detalhadas.
+                </p>
+                <div class="game-stats">
+                    <span class="game-stat">📝 20 questões</span>
+                    <span class="game-stat">⏱️ 10 min</span>
+                </div>
+            </a>
+
+            <a href="linha-do-tempo.html" class="game-card">
+                <div class="game-icon">⏳</div>
+                <h3 class="game-title">Linha do Tempo</h3>
+                <p class="game-description">
+                    Ordene eventos históricos cronologicamente. Arraste e solte para 
+                    organizar os fatos na sequência correta. 5 rodadas desafiantes!
+                </p>
+                <div class="game-stats">
+                    <span class="game-stat">📅 5 rodadas</span>
+                    <span class="game-stat">🎯 100 pontos</span>
+                </div>
+            </a>
+
+            <a href="associacao.html" class="game-card">
+                <div class="game-icon">🔗</div>
+                <h3 class="game-title">Associação de Conceitos</h3>
+                <p class="game-description">
+                    Ligue termos históricos às suas definições. Um jogo de memória 
+                    que ajuda a fixar conceitos importantes para o ENEM.
+                </p>
+                <div class="game-stats">
+                    <span class="game-stat">🧠 5 rodadas</span>
+                    <span class="game-stat">💡 25 conceitos</span>
+                </div>
+            </a>
+
+            <a href="caca-palavras.html" class="game-card">
+                <div class="game-icon">🔍</div>
+                <h3 class="game-title">Caça-Palavras Histórico</h3>
+                <p class="game-description">
+                    Encontre palavras relacionadas à história escondidas na grade. 
+                    Um passatempo clássico com temas do ENEM!
+                </p>
+                <div class="game-stats">
+                    <span class="game-stat">🔠 5 categorias</span>
+                    <span class="game-stat">⏰ Contra o tempo</span>
+                </div>
+            </a>
+
+            <a href="verdadeiro-falso.html" class="game-card">
+                <div class="game-icon">⚖️</div>
+                <h3 class="game-title">Verdadeiro ou Falso</h3>
+                <p class="game-description">
+                    Julgue afirmações sobre história. Identifique se cada statement 
+                    é verdadeiro ou falso e aprenda com as explicações.
+                </p>
+                <div class="game-stats">
+                    <span class="game-stat">✓ 20 afirmações</span>
+                    <span class="game-stat">🔥 Bônus sequência</span>
+                </div>
+            </a>
+
+            <a href="personagens.html" class="game-card">
+                <div class="game-icon">👤</div>
+                <h3 class="game-title">Desafio de Personagens</h3>
+                <p class="game-description">
+                    Identifique personagens históricos pelas pistas! Quanto menos 
+                    pistas usar, mais pontos você ganha.
+                </p>
+                <div class="game-stats">
+                    <span class="game-stat">🎭 15 personagens</span>
+                    <span class="game-stat">🎯 Até 50 pts/cada</span>
+                </div>
+            </a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/historia_enem/" class="btn">← Voltar ao Curso</a>
+        </div>
+
+        <footer>
+            <p>© 2025 História para ENEM - Jogos Educacionais</p>
+        </footer>
+    </div>
+</body>
+</html>

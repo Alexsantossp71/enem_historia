@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de História - ENEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: #888; }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            transition: width 0.3s ease;
+        }
+        .question-number {
+            color: #f39c12;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .option:hover {
+            background: rgba(79, 70, 229, 0.2);
+            border-color: #4f46e5;
+        }
+        .option.correct {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+        }
+        .option.wrong {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+        }
+        .option.selected {
+            border-color: #4f46e5;
+        }
+        .score-display {
+            text-align: center;
+            padding: 2rem;
+        }
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        .feedback {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .feedback.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            display: block;
+        }
+        .feedback.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            display: block;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(79, 70, 229, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .stat-item {
+            padding: 1rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: #fff; }
+        @media (max-width: 600px) {
+            .question { font-size: 1.1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/historia_enem/" class="back-link">← Voltar ao início</a>
+            <h1>🎯 Quiz de História</h1>
+            <p class="subtitle">Teste seus conhecimentos para o ENEM!</p>
+        </header>
+
+        <div class="game-card" id="quiz-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            
+            <div id="question-area">
+                <span class="category-tag" id="category"></span>
+                <p class="question-number" id="question-number"></p>
+                <p class="question" id="question"></p>
+                
+                <div class="options" id="options"></div>
+                
+                <div class="feedback" id="feedback"></div>
+                
+                <button class="btn" id="next-btn" style="display: none;">Próxima Pergunta →</button>
+            </div>
+            
+            <div id="result-area" style="display: none;">
+                <div class="score-display">
+                    <p>Sua pontuação:</p>
+                    <p class="score-value" id="final-score"></p>
+                    <p id="score-message"></p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <p class="stat-value" id="correct-count" style="color: #22c55e;"></p>
+                        <p class="stat-label">Acertos</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="wrong-count" style="color: #ef4444;"></p>
+                        <p class="stat-label">Erros</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="percentage" style="color: #f39c12;"></p>
+                        <p class="stat-label">Aproveitamento</p>
+                    </div>
+                </div>
+                <button class="btn" onclick="startQuiz()">Jogar Novamente</button>
+                <a href="/historia_enem/" class="btn">Voltar ao Início</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                category: "Pré-História",
+                question: "Qual período da Pré-História é caracterizado pelo desenvolvimento da agricultura e pela sedentarização dos grupos humanos?",
+                options: ["Paleolítico", "Neolítico", "Idade dos Metais", "Idade da Pedra Lascada"],
+                correct: 1,
+                explanation: "O Neolítico (Idade da Pedra Polida) é marcado pela Revolução Neolítica, com o desenvolvimento da agricultura, pecuária e sedentarização."
+            },
+            {
+                category: "Civilizações Antigas",
+                question: "A escrita cuneiforme foi desenvolvida por qual civilização antiga?",
+                options: ["Egípcios", "Gregos", "Sumérios", "Chineses"],
+                correct: 2,
+                explanation: "A escrita cuneiforme foi criada pelos sumérios na Mesopotâmia, por volta de 3500 a.C."
+            },
+            {
+                category: "Grécia Antiga",
+                question: "Qual reformador ateniense é considerado o 'pai da democracia'?",
+                options: ["Drácon", "Sólon", "Clístenes", "Péricles"],
+                correct: 2,
+                explanation: "Clístenes, em 508 a.C., implementou reformas que estabeleceram as bases da democracia ateniense."
+            },
+            {
+                category: "Roma Antiga",
+                question: "A Pax Romana, período de paz e estabilidade, ocorreu durante qual fase do Império Romano?",
+                options: ["República", "Alto Império", "Baixo Império", "Monarquia"],
+                correct: 1,
+                explanation: "A Pax Romana ocorreu durante o Alto Império (séculos I e II d.C.), especialmente sob o governo de Augusto e seus sucessores."
+            },
+            {
+                category: "Idade Média",
+                question: "O sistema feudal era caracterizado por relações de:",
+                options: ["Sindicato e patronato", "Suserania e vassalagem", "Escravidão e liberdade", "Democracia e tirania"],
+                correct: 1,
+                explanation: "O feudalismo baseava-se em relações de suserania (senhor) e vassalagem (vassalo), com obrigações mútuas."
+            },
+            {
+                category: "Renascimento",
+                question: "O movimento cultural que valorizava o ser humano e a razão, surgido no século XV, é chamado de:",
+                options: ["Iluminismo", "Humanismo", "Romantismo", "Realismo"],
+                correct: 1,
+                explanation: "O Humanismo foi o movimento central do Renascimento, valorizando o antropocentrismo e a razão humana."
+            },
+            {
+                category: "Absolutismo",
+                question: "Qual teórico defendeu o 'direito divino dos reis' como justificativa para o absolutismo?",
+                options: ["John Locke", "Thomas Hobbes", "Jacques Bossuet", "Montesquieu"],
+                correct: 2,
+                explanation: "Jacques Bossuet defendeu que o rei recebia seu poder diretamente de Deus, sendo responsável apenas perante Ele."
+            },
+            {
+                category: "Iluminismo",
+                question: "Qual filósofo iluminista propôs a tripartição dos poderes (Executivo, Legislativo e Judiciário)?",
+                options: ["Rousseau", "Voltaire", "Montesquieu", "Diderot"],
+                correct: 2,
+                explanation: "Montesquieu, em 'O Espírito das Leis' (1748), propôs a separação dos três poderes como garantia contra a tirania."
+            },
+            {
+                category: "Revoluções Burguesas",
+                question: "A Queda da Bastilha, em 14 de julho de 1789, marca o início de qual revolução?",
+                options: ["Revolução Americana", "Revolução Francesa", "Revolução Inglesa", "Revolução Russa"],
+                correct: 1,
+                explanation: "A tomada da Bastilha é considerada o marco inicial da Revolução Francesa."
+            },
+            {
+                category: "Revolução Industrial",
+                question: "Qual foi a primeira fonte de energia utilizada na Revolução Industrial?",
+                options: ["Petróleo", "Eletricidade", "Carvão", "Gás natural"],
+                correct: 2,
+                explanation: "O carvão mineral foi a principal fonte de energia da Primeira Revolução Industrial, alimentando as máquinas a vapor."
+            },
+            {
+                category: "Imperialismo",
+                question: "A Conferência de Berlim (1884-1885) teve como objetivo:",
+                options: ["Dividir a Ásia entre potências europeias", "Dividir a África entre potências europeias", "Criar a Liga das Nações", "Estabelecer fronteiras na Europa"],
+                correct: 1,
+                explanation: "A Conferência de Berlim estabeleceu as regras para a partilha da África entre as potências europeias."
+            },
+            {
+                category: "Primeira Guerra",
+                question: "O assassinato de qual arquiduque foi o estopim para a Primeira Guerra Mundial?",
+                options: ["Francisco Ferdinando", "Francisco José", "Guilherme II", "Nicolau II"],
+                correct: 0,
+                explanation: "O assassinato do arquiduque Francisco Ferdinando em Sarajevo, em 1914, desencadeou a Primeira Guerra."
+            },
+            {
+                category: "Revolução Russa",
+                question: "Qual foi o lema dos bolcheviques durante a Revolução Russa de 1917?",
+                options: ["Liberdade, Igualdade, Fraternidade", "Paz, Pão, Terra", "Trabalho, Família, Pátria", "Ordem e Progresso"],
+                correct: 1,
+                explanation: "Lênin e os bolcheviques utilizaram o lema 'Paz, Pão, Terra' para conquistar apoio popular."
+            },
+            {
+                category: "Segunda Guerra",
+                question: "O Holocausto durante a Segunda Guerra Mundial resultou no genocídio de aproximadamente quantos judeus?",
+                options: ["1 milhão", "3 milhões", "6 milhões", "10 milhões"],
+                correct: 2,
+                explanation: "O Holocausto foi o genocídio sistemático de aproximadamente 6 milhões de judeus pelo regime nazista."
+            },
+            {
+                category: "Guerra Fria",
+                question: "Qual evento marcou o fim simbólico da Guerra Fria?",
+                options: ["Criação da OTAN", "Guerra da Coreia", "Queda do Muro de Berlim", "Crise dos Mísseis"],
+                correct: 2,
+                explanation: "A queda do Muro de Berlim em 1989 simbolizou o fim da Guerra Fria e da divisão da Europa."
+            },
+            {
+                category: "Brasil Colônia",
+                question: "O sistema de capitanias hereditárias foi implantado no Brasil em qual ano?",
+                options: ["1500", "1530", "1549", "1600"],
+                correct: 1,
+                explanation: "As capitanias hereditárias foram implantadas em 1530, com a chegada de Martim Afonso de Sousa."
+            },
+            {
+                category: "Império",
+                question: "Quem proclamou a independência do Brasil em 1822?",
+                options: ["D. João VI", "D. Pedro I", "D. Pedro II", "Tiradentes"],
+                correct: 1,
+                explanation: "D. Pedro I proclamou a independência do Brasil em 7 de setembro de 1822, às margens do riacho do Ipiranga."
+            },
+            {
+                category: "República Velha",
+                question: "O 'voto de cabresto' caracterizava qual período da história brasileira?",
+                options: ["Império", "República Velha", "Era Vargas", "Ditadura Militar"],
+                correct: 1,
+                explanation: "O 'voto de cabresto' era a prática de controle eleitoral durante a República Velha, quando coronéis obrigavam votantes."
+            },
+            {
+                category: "Era Vargas",
+                question: "A CLT (Consolidação das Leis do Trabalho) foi criada em qual ano?",
+                options: ["1930", "1937", "1943", "1945"],
+                correct: 2,
+                explanation: "A CLT foi decretada por Getúlio Vargas em 1943, consolidando os direitos trabalhistas no Brasil."
+            },
+            {
+                category: "Ditadura Militar",
+                question: "O AI-5 (Ato Institucional Número 5), de 1968, estabeleceu:",
+                options: ["A redemocratização", "O fechamento do Congresso e censura prévia", "A anistia política", "As eleições diretas"],
+                correct: 1,
+                explanation: "O AI-5 fechou o Congresso, instituiu a censura prévia e suspendeu garantias constitucionais."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function startQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            shuffleArray(questions);
+            document.getElementById('question-area').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            answered = false;
+            const q = questions[currentQuestion];
+            
+            document.getElementById('progress').style.width = ((currentQuestion) / questions.length * 100) + '%';
+            document.getElementById('category').textContent = q.category;
+            document.getElementById('question-number').textContent = `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+            document.getElementById('question').textContent = q.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function selectAnswer(index) {
+            if (answered) return;
+            answered = true;
+            
+            const q = questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((opt, i) => {
+                if (i === q.correct) {
+                    opt.classList.add('correct');
+                } else if (i === index && i !== q.correct) {
+                    opt.classList.add('wrong');
+                }
+            });
+            
+            const feedback = document.getElementById('feedback');
+            if (index === q.correct) {
+                score++;
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ Correto! ' + q.explanation;
+            } else {
+                feedback.className = 'feedback wrong';
+                feedback.textContent = '✗ Incorreto! ' + q.explanation;
+            }
+            
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        document.getElementById('next-btn').onclick = () => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        };
+
+        function showResults() {
+            document.getElementById('question-area').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('final-score').textContent = score + '/' + questions.length;
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('wrong-count').textContent = questions.length - score;
+            document.getElementById('percentage').textContent = percentage + '%';
+            
+            let message = '';
+            if (percentage >= 90) message = '🌟 Excelente! Você está muito bem preparado!';
+            else if (percentage >= 70) message = '👏 Muito bom! Continue estudando!';
+            else if (percentage >= 50) message = '📚 Bom trabalho! Revise alguns tópicos.';
+            else message = '💪 Continue estudando! Você vai conseguir!';
+            
+            document.getElementById('score-message').textContent = message;
+        }
+
+        startQuiz();
+    </script>
+</body>
+</html>

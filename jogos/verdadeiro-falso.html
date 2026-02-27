@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdadeiro ou Falso - História ENEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: #888; }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            transition: width 0.3s ease;
+        }
+        .score-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .score-item .label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .score-item .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .statement-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(79, 70, 229, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .statement {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .btn-answer {
+            flex: 1;
+            max-width: 200px;
+            padding: 1rem 2rem;
+            border: 2px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        .btn-true {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        .btn-true:hover {
+            background: rgba(34, 197, 94, 0.2);
+        }
+        .btn-true.selected {
+            background: rgba(34, 197, 94, 0.3);
+        }
+        .btn-false {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        .btn-false:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+        .btn-false.selected {
+            background: rgba(239, 68, 68, 0.3);
+        }
+        .feedback {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+        }
+        .feedback.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+        }
+        .explanation {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        .result-area {
+            text-align: center;
+            padding: 2rem;
+        }
+        .final-score {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .streak-display {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(245, 158, 11, 0.2);
+        }
+        .streak-display span {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: #fff; }
+        @media (max-width: 600px) {
+            .statement { font-size: 1.1rem; }
+            h1 { font-size: 1.8rem; }
+            .buttons-container { flex-direction: column; }
+            .btn-answer { max-width: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/historia_enem/" class="back-link">← Voltar ao início</a>
+            <h1>⚖️ Verdadeiro ou Falso</h1>
+            <p class="subtitle">Julgue as afirmações históricas!</p>
+        </header>
+
+        <div class="game-card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            
+            <div class="score-bar">
+                <div class="score-item">
+                    <div class="label">Questão</div>
+                    <div class="value" id="question-num">1/20</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Acertos</div>
+                    <div class="value" id="correct" style="color: #22c55e;">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Sequência</div>
+                    <div class="value" id="streak" style="color: #f39c12;">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="label">Pontos</div>
+                    <div class="value" id="score" style="color: #ec4899;">0</div>
+                </div>
+            </div>
+            
+            <div class="streak-display" id="streak-display" style="display: none;">
+                🔥 Sequência de <span id="streak-count">0</span> acertos! Bônus ativo!
+            </div>
+            
+            <div id="game-content">
+                <div class="statement-card">
+                    <span class="category-tag" id="category"></span>
+                    <p class="statement" id="statement"></p>
+                    
+                    <div class="buttons-container" id="buttons">
+                        <button class="btn-answer btn-true" onclick="answer(true)">✓ VERDADEIRO</button>
+                        <button class="btn-answer btn-false" onclick="answer(false)">✗ FALSO</button>
+                    </div>
+                    
+                    <div class="feedback" id="feedback">
+                        <div id="feedback-icon"></div>
+                        <div class="explanation" id="explanation"></div>
+                    </div>
+                    
+                    <button class="btn" id="next-btn" style="display: none; margin-top: 1rem;" onclick="nextQuestion()">Próxima →</button>
+                </div>
+            </div>
+            
+            <div class="result-area" id="result-area" style="display: none;">
+                <p>Quiz finalizado!</p>
+                <p class="final-score" id="final-score"></p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <p class="stat-value" id="correct-count" style="color: #22c55e;"></p>
+                        <p class="stat-label">Acertos</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="wrong-count" style="color: #ef4444;"></p>
+                        <p class="stat-label">Erros</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-value" id="percentage" style="color: #f39c12;"></p>
+                        <p class="stat-label">Aproveitamento</p>
+                    </div>
+                </div>
+                <p id="result-message"></p>
+                <button class="btn" onclick="startGame()">Jogar Novamente</button>
+                <a href="/historia_enem/" class="btn">Voltar ao Início</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const statements = [
+            { category: "Pré-História", statement: "A Revolução Neolítica marcou a transição do nomadismo para o sedentarismo humano.", isTrue: true, explanation: "Correto! A Revolução Neolítica envolveu o desenvolvimento da agricultura e pecuária, permitindo a fixação dos grupos humanos em aldeias." },
+            { category: "Pré-História", statement: "O fogo foi dominado pelos humanos apenas durante o período Neolítico.", isTrue: false, explanation: "Errado! O domínio do fogo ocorreu durante o Paleolítico, há aproximadamente 400.000 anos, muito antes do Neolítico." },
+            { category: "Civilizações Antigas", statement: "Os egípcios desenvolveram a escrita hieroglífica e construíram as pirâmides.", isTrue: true, explanation: "Correto! Os egípcios utilizavam hieróglifos como sistema de escrita e construíram as famosas pirâmides como túmulos para os faraós." },
+            { category: "Civilizações Antigas", statement: "O Código de Hamurabi foi criado na Grécia Antiga.", isTrue: false, explanation: "Errado! O Código de Hamurabi foi criado na Babilônia (Mesopotâmia), não na Grécia. É um dos primeiros códigos de leis escritos da história." },
+            { category: "Grécia Antiga", statement: "A democracia ateniense permitia que todos os habitantes de Atenas participassem das decisões políticas.", isTrue: false, explanation: "Errado! A democracia ateniense excluía mulheres, estrangeiros (metecos) e escravos. Apenas cidadãos homens livres podiam participar." },
+            { category: "Roma Antiga", statement: "O Império Romano foi dividido em duas partes em 395 d.C., criando o Império Romano do Ocidente e do Oriente.", isTrue: true, explanation: "Correto! Em 395 d.C., o imperador Teodósio dividiu o império entre seus filhos Arcádio (Oriente) e Honório (Ocidente)." },
+            { category: "Idade Média", statement: "O feudalismo era um sistema baseado em relações de suserania e vassalagem.", isTrue: true, explanation: "Correto! O feudalismo caracterizava-se por laços de dependência pessoal entre senhores (suseranos) e vassalos." },
+            { category: "Idade Média", statement: "As Cruzadas foram expedições militares organizadas pela Igreja Católica para reconquistar a Terra Santa.", isTrue: true, explanation: "Correto! As Cruzadas ocorreram entre os séculos XI e XIII com o objetivo de retomar Jerusalém do domínio muçulmano." },
+            { category: "Renascimento", statement: "O Renascimento foi um movimento exclusivamente artístico.", isTrue: false, explanation: "Errado! O Renascimento foi um movimento cultural amplo que incluiu artes, ciências, filosofia e literatura, caracterizado pelo humanismo." },
+            { category: "Absolutismo", statement: "Luís XIV, o Rei Sol, é considerado o símbolo máximo do absolutismo na França.", isTrue: true, explanation: "Correto! Luís XIV centralizou todo o poder na França e é famoso pela frase 'O Estado sou eu'." },
+            { category: "Iluminismo", statement: "Montesquieu defendia a separação dos três poderes como forma de evitar a tirania.", isTrue: true, explanation: "Correto! Em 'O Espírito das Leis', Montesquieu propôs a divisão entre Executivo, Legislativo e Judiciário para garantir o equilíbrio." },
+            { category: "Revoluções", statement: "A Revolução Francesa começou com a tomada da Bastilha em 14 de julho de 1789.", isTrue: true, explanation: "Correto! A Queda da Bastilha é considerada o marco inicial da Revolução Francesa." },
+            { category: "Revoluções", statement: "A Revolução Industrial iniciou-se na Alemanha no século XVIII.", isTrue: false, explanation: "Errado! A Revolução Industrial começou na Inglaterra no século XVIII, devido às condições favoráveis do país." },
+            { category: "Imperialismo", statement: "A Conferência de Berlim (1884-1885) dividiu a África entre as potências europeias.", isTrue: true, explanation: "Correto! A Conferência de Berlim estabeleceu as regras para a ocupação colonial da África." },
+            { category: "Primeira Guerra", statement: "A Primeira Guerra Mundial foi causada apenas pelo assassinato do arquiduque Francisco Ferdinando.", isTrue: false, explanation: "Errado! O assassinato foi o estopim, mas as causas incluíam rivalidades imperialistas, nacionalismo, corrida armamentista e alianças militares." },
+            { category: "Revolução Russa", statement: "A Revolução Russa de 1917 foi liderada por Lênin e os bolcheviques.", isTrue: true, explanation: "Correto! Lênin liderou os bolcheviques na Revolução de Outubro de 1917, derrubando o Governo Provisório." },
+            { category: "Segunda Guerra", statement: "O Holocausto foi o genocídio de aproximadamente 6 milhões de judeus durante a Segunda Guerra Mundial.", isTrue: true, explanation: "Correto! O Holocausto foi o assassinato sistemático de cerca de 6 milhões de judeus pelo regime nazista." },
+            { category: "Guerra Fria", statement: "O Muro de Berlim caiu em 1989, marcando o fim da Guerra Fria.", isTrue: true, explanation: "Correto! A queda do Muro de Berlim em 9 de novembro de 1989 simbolizou o fim da divisão da Europa e da Guerra Fria." },
+            { category: "Brasil", statement: "A independência do Brasil foi proclamada por D. Pedro I em 7 de setembro de 1822.", isTrue: true, explanation: "Correto! O Grito do Ipiranga, em 7 de setembro de 1822, marcou a independência do Brasil." },
+            { category: "Brasil", statement: "A CLT (Consolidação das Leis do Trabalho) foi criada durante o governo de Getúlio Vargas em 1943.", isTrue: true, explanation: "Correto! A CLT foi decretada por Vargas em 1943, consolidando os direitos trabalhistas no Brasil." },
+            { category: "Brasil", statement: "O AI-5, decretado em 1968, fechou o Congresso Nacional e suspendeu garantias constitucionais.", isTrue: true, explanation: "Correto! O Ato Institucional nº 5 foi o mais repressivo da ditadura militar, instituindo censura prévia e fechando o Congresso." }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let correct = 0;
+        let streak = 0;
+        let maxStreak = 0;
+        let answered = false;
+        let gameStatements = [];
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startGame() {
+            currentQuestion = 0;
+            score = 0;
+            correct = 0;
+            streak = 0;
+            maxStreak = 0;
+            gameStatements = shuffleArray(statements).slice(0, 20);
+            document.getElementById('game-content').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            answered = false;
+            const q = gameStatements[currentQuestion];
+            
+            document.getElementById('progress').style.width = (currentQuestion / gameStatements.length * 100) + '%';
+            document.getElementById('question-num').textContent = `${currentQuestion + 1}/${gameStatements.length}`;
+            document.getElementById('category').textContent = q.category;
+            document.getElementById('statement').textContent = q.statement;
+            
+            document.getElementById('buttons').style.display = 'flex';
+            document.querySelectorAll('.btn-answer').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            document.getElementById('correct').textContent = correct;
+            document.getElementById('streak').textContent = streak;
+            document.getElementById('score').textContent = score;
+            
+            if (streak >= 3) {
+                document.getElementById('streak-display').style.display = 'block';
+                document.getElementById('streak-count').textContent = streak;
+            } else {
+                document.getElementById('streak-display').style.display = 'none';
+            }
+        }
+
+        function answer(userAnswer) {
+            if (answered) return;
+            answered = true;
+            
+            const q = gameStatements[currentQuestion];
+            const isCorrect = userAnswer === q.isTrue;
+            const feedback = document.getElementById('feedback');
+            
+            // Highlight selected button
+            if (userAnswer) {
+                document.querySelector('.btn-true').classList.add('selected');
+            } else {
+                document.querySelector('.btn-false').classList.add('selected');
+            }
+            
+            document.getElementById('buttons').style.display = 'none';
+            
+            if (isCorrect) {
+                correct++;
+                streak++;
+                if (streak > maxStreak) maxStreak = streak;
+                
+                // Bonus for streak
+                let points = 10;
+                if (streak >= 3) points += streak * 2;
+                score += points;
+                
+                feedback.className = 'feedback show correct';
+                document.getElementById('feedback-icon').textContent = '✓ Correto!';
+            } else {
+                streak = 0;
+                feedback.className = 'feedback show wrong';
+                document.getElementById('feedback-icon').textContent = '✗ Incorreto!';
+            }
+            
+            document.getElementById('explanation').textContent = q.explanation;
+            document.getElementById('next-btn').style.display = 'inline-block';
+            
+            document.getElementById('correct').textContent = correct;
+            document.getElementById('streak').textContent = streak;
+            document.getElementById('score').textContent = score;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < gameStatements.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('game-content').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            
+            const percentage = Math.round((correct / gameStatements.length) * 100);
+            document.getElementById('final-score').textContent = score + ' pontos';
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('wrong-count').textContent = gameStatements.length - correct;
+            document.getElementById('percentage').textContent = percentage + '%';
+            
+            let message = '';
+            if (percentage >= 90) message = '🌟 Excelente! Você domina muito bem a história!';
+            else if (percentage >= 70) message = '👏 Muito bom! Continue estudando!';
+            else if (percentage >= 50) message = '📚 Bom trabalho! Revise alguns tópicos.';
+            else message = '💪 Continue estudando! Você vai melhorar!';
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

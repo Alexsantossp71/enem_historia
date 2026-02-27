@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associação de Conceitos - História ENEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: #888; }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .instructions {
+            background: rgba(79, 70, 229, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .column-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+        }
+        .term-card, .definition-card {
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .term-card {
+            background: rgba(79, 70, 229, 0.2);
+            border: 2px solid rgba(79, 70, 229, 0.3);
+        }
+        .term-card:hover {
+            background: rgba(79, 70, 229, 0.4);
+            border-color: #4f46e5;
+        }
+        .term-card.selected {
+            background: rgba(79, 70, 229, 0.6);
+            border-color: #4f46e5;
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+        }
+        .term-card.matched {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+            cursor: default;
+        }
+        .definition-card {
+            background: rgba(236, 72, 153, 0.1);
+            border: 2px solid rgba(236, 72, 153, 0.3);
+        }
+        .definition-card:hover {
+            background: rgba(236, 72, 153, 0.25);
+            border-color: #ec4899;
+        }
+        .definition-card.selected {
+            background: rgba(236, 72, 153, 0.35);
+            border-color: #ec4899;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+        }
+        .definition-card.matched {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+            cursor: default;
+        }
+        .score-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .score-item {
+            text-align: center;
+        }
+        .score-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+        }
+        .feedback {
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            text-align: center;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+        }
+        .feedback.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+        }
+        .result-area {
+            text-align: center;
+            padding: 2rem;
+        }
+        .final-score {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: #fff; }
+        .matches-display {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .match-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.3s;
+        }
+        .match-dot.correct {
+            background: #22c55e;
+        }
+        @media (max-width: 700px) {
+            .game-area {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/historia_enem/" class="back-link">← Voltar ao início</a>
+            <h1>🔗 Associação de Conceitos</h1>
+            <p class="subtitle">Ligue cada termo à sua definição!</p>
+        </header>
+
+        <div class="game-card">
+            <div class="instructions">
+                📋 Clique em um termo e depois em sua definição correspondente. Encontre todos os pares!
+            </div>
+            
+            <div class="score-bar">
+                <div class="score-item">
+                    <div class="score-label">Rodada</div>
+                    <div class="score-value" id="round">1/5</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Acertos</div>
+                    <div class="score-value" id="matches" style="color: #22c55e;">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Erros</div>
+                    <div class="score-value" id="errors" style="color: #ef4444;">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Pontos</div>
+                    <div class="score-value" id="score" style="color: #f39c12;">0</div>
+                </div>
+            </div>
+            
+            <div id="game-content">
+                <div class="game-area">
+                    <div class="column">
+                        <div class="column-title">TERMOS</div>
+                        <div id="terms-column"></div>
+                    </div>
+                    <div class="column">
+                        <div class="column-title">DEFINIÇÕES</div>
+                        <div id="definitions-column"></div>
+                    </div>
+                </div>
+                
+                <div class="matches-display" id="matches-display"></div>
+                
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="result-area" id="result-area" style="display: none;">
+                <p>Parabéns! Você completou todas as rodadas!</p>
+                <p class="final-score" id="final-score"></p>
+                <p id="result-message"></p>
+                <button class="btn" onclick="startGame()">Jogar Novamente</button>
+                <a href="/historia_enem/" class="btn btn-secondary">Voltar ao Início</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const conceptGroups = [
+            [
+                { term: "Feudalismo", definition: "Sistema político-econômico medieval baseado em relações de vassalagem e trabalho servil" },
+                { term: "Renascimento", definition: "Movimento cultural dos séculos XV-XVI que resgatou valores da antiguidade clássica" },
+                { term: "Absolutismo", definition: "Regime político em que o rei concentrou todos os poderes em suas mãos" },
+                { term: "Mercantilismo", definition: "Política econômica baseada no metalismo e balança comercial favorável" },
+                { term: "Iluminismo", definition: "Movimento intelectual que defendia a razão e criticava o absolutismo" }
+            ],
+            [
+                { term: "Revolução Industrial", definition: "Processo de mecanização da produção que substituiu o trabalho artesanal" },
+                { term: "Burguesia", definition: "Classe social que surgiu com o comércio e as cidades medievais" },
+                { term: "Proletariado", definition: "Classe trabalhadora que vende sua força de trabalho" },
+                { term: "Capitalismo", definition: "Sistema econômico baseado na propriedade privada e no lucro" },
+                { term: "Socialismo", definition: "Ideologia que propõe a propriedade coletiva dos meios de produção" }
+            ],
+            [
+                { term: "Imperialismo", definition: "Expansão das potências europeias sobre África e Ásia no século XIX" },
+                { term: "Colonialismo", definition: "Domínio político e econômico de um país sobre outro território" },
+                { term: "Nacionalismo", definition: "Ideologia que exalta a identidade e soberania de uma nação" },
+                { term: "Liberalismo", definition: "Ideologia que defende liberdade econômica e limitação do Estado" },
+                { term: "Zollverein", definition: "União aduaneira alemã que unificou economicamente os estados germânicos" }
+            ],
+            [
+                { term: "Guerra Fria", definition: "Conflito ideológico entre EUA e URSS sem confronto militar direto" },
+                { term: "Cortina de Ferro", definition: "Divisão imaginária entre Europa capitalista e socialista" },
+                { term: "OTAN", definition: "Aliança militar dos países ocidentais liderada pelos EUA" },
+                { term: "Pacto de Varsóvia", definition: "Aliança militar dos países do bloco socialista" },
+                { term: "Perestroika", definition: "Reformas econômicas e políticas de Gorbachev na URSS" }
+            ],
+            [
+                { term: "Coronelismo", definition: "Poder político dos grandes proprietários rurais na República Velha" },
+                { term: "Voto de Cabresto", definition: "Controle eleitoral através de coerção aos eleitores" },
+                { term: "CLT", definition: "Consolidação das Leis do Trabalho criada por Vargas em 1943" },
+                { term: "Estado Novo", definition: "Ditadura de Vargas entre 1937 e 1945" },
+                { term: "AI-5", definition: "Ato Institucional que fechou o Congresso e endureceu a Ditadura Militar" }
+            ]
+        ];
+
+        let currentRound = 0;
+        let score = 0;
+        let matches = 0;
+        let errors = 0;
+        let roundMatches = 0;
+        let roundErrors = 0;
+        let selectedTerm = null;
+        let currentConcepts = [];
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startGame() {
+            currentRound = 0;
+            score = 0;
+            matches = 0;
+            errors = 0;
+            document.getElementById('game-content').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+            loadRound();
+        }
+
+        function loadRound() {
+            roundMatches = 0;
+            roundErrors = 0;
+            selectedTerm = null;
+            
+            document.getElementById('round').textContent = `${currentRound + 1}/5`;
+            document.getElementById('matches').textContent = matches;
+            document.getElementById('errors').textContent = errors;
+            document.getElementById('score').textContent = score;
+            document.getElementById('feedback').style.display = 'none';
+            
+            currentConcepts = shuffleArray([...conceptGroups[currentRound]]);
+            const shuffledTerms = shuffleArray([...currentConcepts]);
+            const shuffledDefinitions = shuffleArray([...currentConcepts]);
+            
+            const termsColumn = document.getElementById('terms-column');
+            const definitionsColumn = document.getElementById('definitions-column');
+            termsColumn.innerHTML = '';
+            definitionsColumn.innerHTML = '';
+            
+            shuffledTerms.forEach((concept, idx) => {
+                const card = document.createElement('div');
+                card.className = 'term-card';
+                card.textContent = concept.term;
+                card.dataset.term = concept.term;
+                card.onclick = () => selectTerm(card, concept.term);
+                termsColumn.appendChild(card);
+            });
+            
+            shuffledDefinitions.forEach((concept, idx) => {
+                const card = document.createElement('div');
+                card.className = 'definition-card';
+                card.textContent = concept.definition;
+                card.dataset.term = concept.term;
+                card.onclick = () => selectDefinition(card, concept.term);
+                definitionsColumn.appendChild(card);
+            });
+            
+            // Create match dots
+            const matchesDisplay = document.getElementById('matches-display');
+            matchesDisplay.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'match-dot';
+                dot.id = `dot-${i}`;
+                matchesDisplay.appendChild(dot);
+            }
+        }
+
+        function selectTerm(card, term) {
+            if (card.classList.contains('matched')) return;
+            
+            document.querySelectorAll('.term-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedTerm = term;
+        }
+
+        function selectDefinition(card, term) {
+            if (card.classList.contains('matched') || !selectedTerm) return;
+            
+            card.classList.add('selected');
+            
+            setTimeout(() => {
+                checkMatch(selectedTerm, term);
+            }, 300);
+        }
+
+        function checkMatch(termSelected, definitionTerm) {
+            const feedback = document.getElementById('feedback');
+            const termCard = document.querySelector(`.term-card[data-term="${termSelected}"]`);
+            const defCard = document.querySelector(`.definition-card[data-term="${definitionTerm}"]`);
+            
+            if (termSelected === definitionTerm) {
+                // Correct match
+                roundMatches++;
+                matches++;
+                score += 20;
+                
+                termCard.classList.remove('selected');
+                termCard.classList.add('matched');
+                defCard.classList.remove('selected');
+                defCard.classList.add('matched');
+                
+                document.getElementById(`dot-${roundMatches - 1}`).classList.add('correct');
+                
+                feedback.className = 'feedback show success';
+                feedback.textContent = `✓ Correto! "${termSelected}" foi associado corretamente.`;
+                
+                if (roundMatches === 5) {
+                    // Round complete
+                    score += 50; // Bonus for completing round without errors
+                    setTimeout(() => {
+                        nextRound();
+                    }, 1500);
+                }
+            } else {
+                // Wrong match
+                roundErrors++;
+                errors++;
+                
+                termCard.classList.remove('selected');
+                defCard.classList.remove('selected');
+                
+                feedback.className = 'feedback show error';
+                feedback.textContent = `✗ Incorreto! Tente novamente.`;
+                
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 1000);
+            }
+            
+            document.getElementById('matches').textContent = matches;
+            document.getElementById('errors').textContent = errors;
+            document.getElementById('score').textContent = score;
+            selectedTerm = null;
+        }
+
+        function nextRound() {
+            currentRound++;
+            if (currentRound < conceptGroups.length) {
+                loadRound();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('game-content').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('final-score').textContent = score + ' pontos';
+            
+            let message = '';
+            const accuracy = matches / (matches + errors) * 100;
+            if (accuracy >= 90) message = '🌟 Excelente! Você domina muito bem os conceitos!';
+            else if (accuracy >= 70) message = '👏 Muito bom! Continue praticando!';
+            else if (accuracy >= 50) message = '📚 Bom trabalho! Revise alguns conceitos.';
+            else message = '💪 Continue estudando! Os conceitos ficarão mais claros.';
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        startGame();
+    </script>
+</body>
+</html>
